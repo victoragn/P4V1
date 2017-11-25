@@ -64,7 +64,6 @@ function login($pseudo,$password){
     if (!$result['check']){
         throw new Exception('Mauvais identifiant ou mot de passe');
     }else{
-        if(!isset($_SESSION)) {session_start();}
         $_SESSION['id'] = $result['id'];
         $_SESSION['pseudo'] = $pseudo;
         $_SESSION['test']='test';

@@ -1,4 +1,5 @@
 <?php 
+if(!isset($_SESSION)) {session_start();}
 require('controler/register.php');
     
 try {
