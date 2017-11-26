@@ -13,8 +13,8 @@ function getForm(){
     $pwd2Color="fondBlanc";
     $emailColor="fondBlanc";
     
-    if (isset($_POST['pseudo'])||isset($_POST['password1'])||isset($_POST['password2'])||isset($_POST['email'])){
-        if(htmlspecialchars($_POST['pseudo'])==""){$pseudoVide=1;$pseudoColor="fondRouge";}
+    if (isset($_POST['pseudoReg'])||isset($_POST['password1'])||isset($_POST['password2'])||isset($_POST['email'])){
+        if(htmlspecialchars($_POST['pseudoReg'])==""){$pseudoVide=1;$pseudoColor="fondRouge";}
         if(htmlspecialchars($_POST['password1'])==""){$pwd1Vide=1;$pwd1Color="fondRouge";}
         if(htmlspecialchars($_POST['password2'])==""){$pwd2Vide=1;$pwd2Color="fondRouge";}
         if(htmlspecialchars($_POST['email'])==""){$emailVide=1;$emailColor="fondRouge";}
