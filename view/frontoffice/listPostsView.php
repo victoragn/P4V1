@@ -6,24 +6,22 @@
 
 
 <?php
-while ($data = $posts->fetch())
-{
+foreach ($posts as &$post){
 ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($data['title']) ?>
-            <em>le <?= $data['creationDate'] ?></em>
+            <?= htmlspecialchars($post->title()) ?>
+            <em>le <?= $post->creationDate() ?></em>
         </h3>
         
         <p>
-            <?= nl2br(htmlspecialchars($data['content'])) ?>
+            <?= nl2br(htmlspecialchars($post->content())) /*nl2br permet le retour à la ligne avec htmlspecialchars*/ ?>
             <br />
-            <em><a href="index.php?action=post&id=<?= $data['id'] ?>">Commentaires</a></em>
+            <em><a href="index.php?action=post&id=<?= $post->id() ?>">Commentaires</a></em>
         </p>
     </div>
 <?php
 }
-$posts->closeCursor();
 ?>
 <?php $content = ob_get_clean(); ?>
 

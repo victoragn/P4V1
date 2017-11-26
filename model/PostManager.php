@@ -19,7 +19,6 @@ class PostManager extends Manager{
         $req = $db->prepare('SELECT id, title, content, creationDate FROM posts WHERE id = ?');
         $req->execute(array($postId));
         $result = $req->fetch();
-        var_dump($result);
         $post=new Post($result);
         return $post;
     }

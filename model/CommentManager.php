@@ -1,27 +1,31 @@
 <?php
-require_once("model/Manager.php"); // Vous n'alliez pas oublier cette ligne ? ;o)
+require_once("model/Manager.php");
+require_once("model/Comment.php");
 
 class CommentManager extends Manager{
     public function getComments($postId){
         $db = $this->dbConnect();
-        $comments = $db->prepare(
-            'SELECT c.id comment_id,u.pseudo author, c.comment comment, DATE_FORMAT(c.comment_date comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
+        $req = $db->prepare(
+            'SELECT id , author_id as authorId, comment, comment_date as commentDate
             FROM comments c
-            INNER JOIN users u
-            ON c.author_id = u.id
             WHERE c.post_id = ? 
             ORDER BY c.comment_date 
             DESC'
         );
-        $comments->execute(array($postId));
+        $req->execute(array($postId));
+        $comments=array();
+        while ($data = $req->fetch()){
+            $comment=new Comment($data);
+            $comments[]=$comment;
+        }
 
         return $comments;
     }
 
-    public function postComment($postId, $author_id, $comment){
+    public function postComment($postId, $authorId, $comment){
         $db = $this->dbConnect();
         $comments = $db->prepare('INSERT INTO comments(post_id, author_id, comment, comment_date) VALUES(?, ?, ?, NOW())');
-        $affectedLines = $comments->execute(array($postId, $author_id, $comment));
+        $affectedLines = $comments->execute(array($postId, $authorId, $comment));
 
         return $affectedLines;
     }
@@ -29,7 +33,7 @@ class CommentManager extends Manager{
     public function getComment($commentId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT c.id comment_id,c.post_id post_id, u.pseudo author, c.comment, DATE_FORMAT(c.comment_date comment_date, \'%d/%m/%Y à %Hh%imin%ss\') AS comment_date_fr
+            'SELECT c.id comment_id,c.post_id post_id, u.pseudo author, c.comment, c.comment_date
             FROM comments c
             INNER JOIN users u
             ON c.author_id = u.id
