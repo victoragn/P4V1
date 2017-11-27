@@ -7,9 +7,9 @@ class CommentManager extends Manager{
         $db = $this->dbConnect();
         $req = $db->prepare(
             'SELECT id , author_id as authorId, comment, comment_date as commentDate
-            FROM comments c
-            WHERE c.post_id = ? 
-            ORDER BY c.comment_date 
+            FROM comments
+            WHERE post_id = ?
+            ORDER BY comment_date
             DESC'
         );
         $req->execute(array($postId));
@@ -33,25 +33,24 @@ class CommentManager extends Manager{
     public function getComment($commentId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT c.id comment_id,c.post_id post_id, u.pseudo author, c.comment, c.comment_date
-            FROM comments c
-            INNER JOIN users u
-            ON c.author_id = u.id
+            'SELECT id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
+            FROM comments
             WHERE id = ?'
         );
         $req->execute(array($commentId));
-        $comment = $req->fetch();
+        $result = $req->fetch();
+        $comment=new Comment($result);
         
         return $comment;
     }
     
     public function updateComment($commentId, $author_id, $comment){
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET author_id= :author_id, comment= :comment, comment_date=NOW() WHERE id= :commentId');
+        $req = $db->prepare('UPDATE comments SET author_id= :authorId, comment= :comment, comment_date=NOW() WHERE id= :id');
         $affectedLines =$req->execute(array(
-            'author_id' => $author_id,
+            'authorId' => $author_id,
             'comment' => $comment,
-            'commentId' => $commentId
+            'id' => $commentId
         ));
         
         return $affectedLines;
@@ -59,9 +58,9 @@ class CommentManager extends Manager{
       
     public function getPostIdByCommentId($commentId){
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT post_id FROM comments WHERE id = ?');
+        $req = $db->prepare('SELECT post_id as postId FROM comments WHERE id = ?');
         $req->execute(array($commentId));
-        $postId= $req->fetch()['post_id'];
+        $postId= $req->fetch()['postId'];
         return $postId;
     }
 }
