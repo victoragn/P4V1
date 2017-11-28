@@ -4,25 +4,22 @@ require_once("model/Manager.php");
 class UserManager extends Manager{
     public function getUsers(){
         $db = $this->dbConnect();
-        $req = $db->query('SELECT id, pseudo, email, DATE_FORMAT(register_date, \'%d/%m/%Y\') AS register_date_fr FROM users ORDER BY id');
+        $req = $db->query('SELECT author_id as id, pseudo, password, email, register_date as registerDate, role FROM users ORDER BY id');
+        $users=array();
+        while ($data = $req->fetch()){
+            $user = new User($data);
+            $users[]=$user;
+        }
 
-        return $req;
+        return $users;
     }
 
-    public function getUser($userId){
+    public function getUserById($userId){
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id,pseudo, email, DATE_FORMAT(register_date, \'%d/%m/%Y\') AS register_date_fr FROM users WHERE id = ?');
+        $req = $db->prepare('author_id as id, pseudo, password, email, register_date as registerDate, role FROM users WHERE id = ?');
         $req->execute(array($userId));
-        $user = $req->fetch();
-
-        return $user;
-    }
-    
-    public function getUserName($userId){
-        $db = $this->dbConnect();
-        $req = $db->prepare('SELECT pseudo FROM users WHERE id = ?');
-        $req->execute(array($userId));
-        $user = $req->fetch();
+        $data = $req->fetch();
+        $user = new User($data);
 
         return $user;
     }
@@ -33,14 +30,17 @@ class UserManager extends Manager{
         $req2 = $db->prepare('SELECT COUNT(*) FROM users WHERE email= :email');
         $req1->execute(array('pseudo' => $pseudo));
         $req2->execute(array('email' => $email));
-        $result = [intval($req1->fetch()[0]),intval($req2->fetch()[0])];
+        $result = [
+            intval($req1->fetch()[0]),
+            intval($req2->fetch()[0])
+        ];
         
         return $result;
     }
     
     public function addUser($pseudo,$password,$email){
         $db = $this->dbConnect();
-        $users = $db->prepare('INSERT INTO users(pseudo, password, email, register_date, role) VALUES(?, ?, ?, NOW(),0)');
+        $users = $db->prepare('INSERT INTO users(pseudo, password, email, register_date as registerDate, role) VALUES(?, ?, ?, NOW(),0)');
         $affectedLines = $users->execute(array($pseudo,$password,$email));
 
         return $affectedLines;
@@ -48,7 +48,7 @@ class UserManager extends Manager{
     
     public function checkLogin($pseudo,$password){
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT id, password FROM users WHERE pseudo= :pseudo');
+        $req = $db->prepare('SELECT author_id as id, password FROM users WHERE pseudo= :pseudo');
         $req->execute(array('pseudo' => $pseudo));
         $req = $req->fetch();
         $result=[
