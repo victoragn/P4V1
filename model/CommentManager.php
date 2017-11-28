@@ -6,7 +6,7 @@ class CommentManager extends Manager{
     public function getComments($postId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT id , author_id as authorId, comment, comment_date as commentDate
+            'SELECT comment_id as id, author_id as authorId, comment, comment_date as commentDate
             FROM comments
             WHERE post_id = ?
             ORDER BY comment_date
@@ -33,7 +33,7 @@ class CommentManager extends Manager{
     public function getComment($commentId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
+            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
             FROM comments
             WHERE id = ?'
         );
@@ -46,11 +46,11 @@ class CommentManager extends Manager{
     
     public function updateComment($commentId, $author_id, $comment){
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET author_id= :authorId, comment= :comment, comment_date=NOW() WHERE id= :id');
+        $req = $db->prepare('UPDATE comments SET author_id= :authorId, comment= :comment, comment_date=NOW() WHERE comment_id= :comment_id');
         $affectedLines =$req->execute(array(
             'authorId' => $author_id,
             'comment' => $comment,
-            'id' => $commentId
+            'comment_id' => $commentId
         ));
         
         return $affectedLines;
@@ -58,7 +58,7 @@ class CommentManager extends Manager{
       
     public function getPostIdByCommentId($commentId){
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT post_id as postId FROM comments WHERE id = ?');
+        $req = $db->prepare('SELECT post_id as postId FROM comments WHERE comment_id = ?');
         $req->execute(array($commentId));
         $postId= $req->fetch()['postId'];
         return $postId;

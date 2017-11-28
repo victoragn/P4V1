@@ -15,7 +15,7 @@ class Comment{
         }else if($nbArgs==1){
             $this->hydrate($args);
         }else{
-            throw new Exception('Trop de paramètres dans le constructeur de Post');
+            throw new Exception('Trop de paramètres dans le constructeur de Comment');
         }
     }
 
