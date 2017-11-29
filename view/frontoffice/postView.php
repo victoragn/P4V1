@@ -16,6 +16,8 @@
 </div>
 
 <h2>Commentaires</h2>
+<?php if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie?>
+
 <form action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
     <div>
         <label for="comment">Ajoutez votre commentaire</label><br />
@@ -25,6 +27,7 @@
         <input type="submit" />
     </div>
 </form>
+<?php } ?>
 
 <?php
 foreach ($comments as &$comment){

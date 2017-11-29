@@ -64,8 +64,13 @@ function login($pseudo,$password){
     if (!$result['check']){
         throw new Exception('Mauvais identifiant ou mot de passe');
     }else{
-        $_SESSION['id'] = $result['id'];
-        $_SESSION['pseudo'] = $pseudo;
-        $_SESSION['test']='test';
+        $_SESSION['author_id'] = $result['id'];
     }
+}
+
+function getUserById($userId){
+    $userManager= new UserManager();
+    $user= $userManager->getUserById($userId);
+
+    return $user;
 }

@@ -1,5 +1,6 @@
 <?php
 require_once("model/Manager.php");
+require_once("model/User.php");
 
 class UserManager extends Manager{
     public function getUsers(){
@@ -16,11 +17,10 @@ class UserManager extends Manager{
 
     public function getUserById($userId){
         $db = $this->dbConnect();
-        $req = $db->prepare('author_id as id, pseudo, password, email, register_date as registerDate, role FROM users WHERE id = ?');
+        $req = $db->prepare('SELECT author_id as id, pseudo, password, email, register_date as registerDate, role FROM users WHERE author_id = ?');
         $req->execute(array($userId));
         $data = $req->fetch();
         $user = new User($data);
-
         return $user;
     }
     

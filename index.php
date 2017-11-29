@@ -3,13 +3,14 @@ if(!isset($_SESSION)) {session_start();}
 require('controler/frontoffice.php');
 
 try {
-     if(isset($_POST['pseudo'])||isset($_POST['password'])){
+     if(isset($_POST['pseudo'])||isset($_POST['password'])){//si retour du formulaire de login
         if(htmlspecialchars($_POST['pseudo'])!="" && htmlspecialchars($_POST['password'])!=""){
             login(htmlspecialchars($_POST['pseudo']),htmlspecialchars($_POST['password']));
         }else{
             throw new Exception('Un des champs n\'est pas rempli');
         }
     }
+
     if (isset($_GET['action'])) {//Tous les cas où GETaction est défini
         if ($_GET['action'] == 'listPosts') {
             listPosts();
@@ -31,7 +32,6 @@ try {
             }
         }elseif ($_GET['action'] == 'disconnect') {
             $_SESSION = array();
-            setcookie('pseudo', '');
             session_destroy();
             header('Location: index.php');
         }

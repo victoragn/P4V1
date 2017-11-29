@@ -8,7 +8,7 @@
         
     <body>
         <?php 
-            if (isset($_SESSION['id'])){
+            if (isset($_SESSION['author_id'])){
                 require('view/frontoffice/userHeader.php');
             }else{
                 require('view/frontoffice/logHeader.php');
