@@ -38,7 +38,7 @@ class Comment{
     public function setAuthorId($authorId){$this->_authorId=(int) $authorId;}
     public function setComment($comment){
         if(is_string($comment)){
-            $this->_comment=$comment;
+            $this->_comment=nl2br(htmlspecialchars($comment));
         }
     }
     public function setcommentDate($commentDate){

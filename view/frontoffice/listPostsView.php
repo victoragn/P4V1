@@ -10,14 +10,14 @@ foreach ($posts as &$post){
 ?>
     <div class="news">
         <h3>
-            <?= htmlspecialchars($post->title()) ?>
-            <em>le <?= $post->creationDate() ?></em>
+            <?= $post->title(); ?>
+            <em>le <?= $post->creationDate(); ?></em>
         </h3>
         
         <p>
-            <?= nl2br(htmlspecialchars($post->content())) /*nl2br permet le retour à la ligne avec htmlspecialchars*/ ?>
+            <?= $post->content(); /*nl2br permet le retour à la ligne avec htmlspecialchars*/ ?>
             <br />
-            <em><a href="index.php?action=post&id=<?= $post->id() ?>">Commentaires</a></em>
+            <em><a href="index.php?action=post&id=<?= $post->id(); ?>">Commentaires</a></em>
         </p>
     </div>
 <?php

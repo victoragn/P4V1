@@ -33,12 +33,12 @@ class Post{
     public function setId($id){$this->_id=(int) $id;}
     public function setTitle($title){
         if(is_string($title) && strlen($title)<255){
-            $this->_title=$title;
+            $this->_title=htmlspecialchars($title);
         }
     }
     public function setContent($content){
         if(is_string($content)){
-            $this->_content=$content;
+            $this->_content=nl2br(htmlspecialchars($content));
         }
     }
     public function setcreationDate($creationDate){

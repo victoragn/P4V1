@@ -6,19 +6,19 @@
 
 <div class="news">
     <h3>
-        <?= htmlspecialchars($post->title()) ?>
-        <em>le <?= $post->creationDate() ?></em>
+        <?= $post->title(); ?>
+        <em>le <?= $post->creationDate(); ?></em>
     </h3>
             
     <p>
-        <?= nl2br(htmlspecialchars($post->content())) /*nl2br met les retours à la ligne*/ ?>
+        <?= $post->content(); /*nl2br met les retours à la ligne*/ ?>
     </p>
 </div>
 
 <h2>Commentaires</h2>
 <?php if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie?>
 
-<form action="index.php?action=addComment&amp;id=<?= $post->id() ?>" method="post">
+<form action="index.php?action=addComment&amp;id=<?= $post->id(); ?>" method="post">
     <div>
         <label for="comment">Ajoutez votre commentaire</label><br />
         <textarea id="comment" name="comment"></textarea>
@@ -32,8 +32,8 @@
 <?php
 foreach ($comments as &$comment){
 ?>
-<p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate() ?></p>
-    <p><?= nl2br(htmlspecialchars($comment->comment())) ?></p>
+<p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate(); ?></p>
+    <p><?= $comment->comment(); ?></p>
 <?php
 }
 ?>
