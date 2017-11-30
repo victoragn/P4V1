@@ -32,8 +32,14 @@
 <?php
 foreach ($comments as &$comment){
 ?>
-<p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate(); ?></p>
-    <p><?= $comment->comment(); ?></p>
+<div class='commentAndAuthor'>
+<p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate();
+    if($comment->authorId()==$_SESSION['author_id']){
+        ?><button class="btnModifComment" >Modifier</button> <?php
+    }
+    ?></p>
+    <p class='contentComment'><?= $comment->comment(); ?></p>
+</div>
 <?php
 }
 ?>
