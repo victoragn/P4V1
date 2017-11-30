@@ -32,7 +32,7 @@
 <?php
 foreach ($comments as &$comment){
 ?>
-<p><strong><?= htmlspecialchars($comment->authorId()) ?></strong> le <?= $comment->commentDate() ?></p>
+<p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate() ?></p>
     <p><?= nl2br(htmlspecialchars($comment->comment())) ?></p>
 <?php
 }

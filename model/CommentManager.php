@@ -1,6 +1,7 @@
 <?php
 require_once("model/Manager.php");
 require_once("model/Comment.php");
+require_once("model/UserManager.php");
 
 class CommentManager extends Manager{
     public function getComments($postId){
@@ -62,5 +63,9 @@ class CommentManager extends Manager{
         $req->execute(array($commentId));
         $postId= $req->fetch()['postId'];
         return $postId;
+    }
+
+    public function getAuthorByComment($comment){
+
     }
 }

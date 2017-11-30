@@ -74,3 +74,10 @@ function getUserById($userId){
 
     return $user;
 }
+
+function getUserByComment($comment){
+    $userManager=new UserManager();
+    $authorId = $comment->authorId();
+    $user=$userManager->getUserById($authorId);
+    return $user;
+}
