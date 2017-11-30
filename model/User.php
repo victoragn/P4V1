@@ -38,7 +38,7 @@ class User{
     public function setId($id){$this->_id=(int) $id;}
     public function setPseudo($pseudo){
         if(is_string($pseudo) && strlen($pseudo)<255){
-            $this->_pseudo=$pseudo;
+            $this->_pseudo=htmlspecialchars($pseudo);
         }
     }
     public function setPassword($password){
@@ -48,7 +48,7 @@ class User{
     }
     public function setEmail($email){
         if(is_string($email) && strlen($email)<256){
-            $this->_email=$email;
+            $this->_email=htmlspecialchars($email);
         }
     }
     public function setRegisterDate($registerDate){

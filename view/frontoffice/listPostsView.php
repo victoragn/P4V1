@@ -15,7 +15,7 @@ foreach ($posts as &$post){
         </h3>
         
         <p>
-            <?= $post->content(); /*nl2br permet le retour à la ligne avec htmlspecialchars*/ ?>
+            <?= $post->content(); ?>
             <br />
             <em><a href="index.php?action=post&id=<?= $post->id(); ?>">Commentaires</a></em>
         </p>
