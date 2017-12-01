@@ -34,27 +34,17 @@ function addComment($postId, $author, $comment){
     }
 }
 
-function updateComment($commentId, $comment){
+function updateComment($commentId, $commentContent){
     $commentManager = new CommentManager();
-    
-    $postId=$commentManager->getPostIdByCommentId($commentId);
-    $affectedLines = $commentManager->updateComment($commentId, $comment);
+    $comment=$commentManager->getComment($commentId);
+    $postId=$comment->postId();
+    $affectedLines = $commentManager->updateComment($commentId, $commentContent);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible de modifier le commentaire !');
     }else {
         header('Location: index.php?action=post&id='. $postId);
     }
-}
-
-function editComment($commentId){
-    $postManager = new PostManager();
-    $commentManager = new CommentManager();
-
-    $comment = $commentManager->getComment($commentId);
-    $post = $postManager->getPost($comment['post_id']);
-
-    require('view/frontoffice/editCommentView.php');
 }
 
 function login($pseudo,$password){

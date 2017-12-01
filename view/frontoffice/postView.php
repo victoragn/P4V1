@@ -43,8 +43,7 @@ foreach ($comments as &$comment){
     </p>
     <p class='contentComment'><?= $comment->comment(); ?></p>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="../P4V1/public/js/script.js"></script>
+
 <?php
 }
 ?>

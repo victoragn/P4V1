@@ -7,7 +7,7 @@ class CommentManager extends Manager{
     public function getComments($postId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT comment_id as id, author_id as authorId, comment, comment_date as commentDate
+            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
             FROM comments
             WHERE post_id = ?
             ORDER BY comment_date
@@ -22,6 +22,20 @@ class CommentManager extends Manager{
 
         return $comments;
     }
+    
+    public function getComment($commentId){
+        $db = $this->dbConnect();
+        $req = $db->prepare(
+            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
+            FROM comments
+            WHERE comment_id = ?'
+        );
+        $req->execute(array($commentId));
+        $result = $req->fetch();
+        $comment=new Comment($result);
+        
+        return $comment;
+    }
 
     public function postComment($postId, $authorId, $comment){
         $db = $this->dbConnect();
@@ -31,25 +45,11 @@ class CommentManager extends Manager{
         return $affectedLines;
     }
     
-    public function getComment($commentId){
-        $db = $this->dbConnect();
-        $req = $db->prepare(
-            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
-            FROM comments
-            WHERE id = ?'
-        );
-        $req->execute(array($commentId));
-        $result = $req->fetch();
-        $comment=new Comment($result);
-        
-        return $comment;
-    }
-    
-    public function updateComment($commentId, $comment){
+    public function updateComment($commentId, $commentContent){
         $db = $this->dbConnect();
         $req = $db->prepare('UPDATE comments SET comment= :comment, comment_date=NOW() WHERE comment_id= :comment_id');
         $affectedLines =$req->execute(array(
-            'comment' => $comment,
+            'comment' => $commentContent,
             'comment_id' => $commentId
         ));
         
