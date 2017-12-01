@@ -40,8 +40,8 @@ class UserManager extends Manager{
     
     public function addUser($pseudo,$password,$email){
         $db = $this->dbConnect();
-        $users = $db->prepare('INSERT INTO users(pseudo, password, email, register_date as registerDate, role) VALUES(?, ?, ?, NOW(),0)');
-        $affectedLines = $users->execute(array($pseudo,$password,$email));
+        $req = $db->prepare('INSERT INTO users(pseudo, password, email, register_date, role) VALUES(?, ?, ?, NOW(),0)');
+        $affectedLines = $req->execute(array($pseudo,$password,$email));
 
         return $affectedLines;
     }

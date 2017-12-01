@@ -15,7 +15,7 @@
    <form action="register.php" method="post">
         <div>
             <label for="pseudoReg">Pseudo</label>
-            <input class="<?= $pseudoColor ?>" id="pseudo_input" type="text" name="pseudoReg" value="<?php if(isset($_POST['pseudo'])){echo htmlspecialchars($_POST['pseudoReg']);}?>" />
+            <input class="<?= $pseudoColor ?>" id="pseudo_input" type="text" name="pseudoReg" value="<?php if(isset($_POST['pseudoReg'])){echo htmlspecialchars($_POST['pseudoReg']);}?>" />
             <?php if (isset($pseudoVide)){echo $messChampVide ;}?>
             <br />
             

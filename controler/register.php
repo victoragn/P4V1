@@ -2,6 +2,8 @@
 
 // Chargement des classes
 require_once('model/UserManager.php');
+require_once('controler/frontoffice.php');
+
 
 $userAlreadyExist;
 $mailAlreadyExist;
@@ -38,28 +40,21 @@ function checkUserAlreadyExist($pseudo,$password,$email){
     $userManager = new UserManager(); 
     $check_result = $userManager->checkUserAlreadyExist($pseudo,$email);
     
-    if ($check_result==[0,0]){
-        $userAlreadyExist=0;
-        $mailAlreadyExist=0;
-        $hash_password= password_hash($password, PASSWORD_DEFAULT);
-        $affectedLines = $userManager->addUser($pseudo,$hash_password,$email);
-        if ($affectedLines === false) {
-            throw new Exception('Impossible d\'ajouter le nouvel utilisateur !');
-        }else {
-            header('Location: index.php');
-        }
-        
-    }else if($check_result==[1,0]){
-        $userAlreadyExist=1;
-        $mailAlreadyExist=0;
-    }else if($check_result==[0,1]){
-        $userAlreadyExist=0;
-        $mailAlreadyExist=1;
-    }else if($check_result==[1,1]){
-        $userAlreadyExist=1;
-        $mailAlreadyExist=1;
-    }else{
+    if(($check_result[0]!=0 && $check_result[0]!=1)||($check_result[1]!=0 && $check_result[1]!=1)){
         throw new Exception('Attention, la vérification de l\'existence du pseudo et du mail a échouée !');
+    }else{
+        $userAlreadyExist=$check_result[0];
+        $mailAlreadyExist=$check_result[1];
+
+        if ($check_result==[0,0]){
+            $hash_password= password_hash($password, PASSWORD_DEFAULT);
+            $affectedLines = $userManager->addUser($pseudo,$hash_password,$email);
+            if ($affectedLines === false) {
+                throw new Exception('Impossible d\'ajouter le nouvel utilisateur !');
+            }else {
+                header('Location: index.php?action=disconnect');
+            }
+        }
     }
     
     getForm();

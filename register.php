@@ -3,8 +3,8 @@ if(!isset($_SESSION)) {session_start();}
 require('controler/register.php');
     
 try {
-    if (!empty($_POST['pseudo']) && !empty($_POST['password1']) && !empty($_POST['password2']) && !empty($_POST['email'])){
-        checkUserAlreadyExist(htmlspecialchars($_POST['pseudo']),htmlspecialchars($_POST['password1']),htmlspecialchars($_POST['email']));
+    if (!empty($_POST['pseudoReg']) && !empty($_POST['password1']) && !empty($_POST['password2']) && !empty($_POST['email'])){
+        checkUserAlreadyExist(htmlspecialchars($_POST['pseudoReg']),htmlspecialchars($_POST['password1']),htmlspecialchars($_POST['email']));
         
     }else{
         getForm(); 
