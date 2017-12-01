@@ -22,29 +22,35 @@ function post(){
     require('view/frontoffice/postView.php');
 }
 
-function addComment($postId, $author, $comment){
+function addComment($postId, $authorId, $commentContent){
     $commentManager = new CommentManager();
+    if($authorId==$_SESSION['author_id']){
+        $affectedLines = $commentManager->postComment($postId, $authorId, $commentContent);
 
-    $affectedLines = $commentManager->postComment($postId, $author, $comment);
-
-    if ($affectedLines === false) {
-        throw new Exception('Impossible d\'ajouter le commentaire !');
-    }else {
-        header('Location: index.php?action=post&id=' . $postId);
+        if ($affectedLines === false) {
+            throw new Exception('Impossible d\'ajouter le commentaire !');
+        }else {
+            header('Location: index.php?action=post&id=' . $postId);
+        }
     }
 }
 
 function updateComment($commentId, $commentContent){
     $commentManager = new CommentManager();
     $comment=$commentManager->getComment($commentId);
-    $postId=$comment->postId();
-    $affectedLines = $commentManager->updateComment($commentId, $commentContent);
+    if($comment->authorId()==$_SESSION['author_id']){
+        $postId=$comment->postId();
+        $affectedLines = $commentManager->updateComment($commentId, $commentContent);
 
-    if ($affectedLines === false) {
-        throw new Exception('Impossible de modifier le commentaire !');
-    }else {
-        header('Location: index.php?action=post&id='. $postId);
+        if ($affectedLines === false) {
+            throw new Exception('Impossible de modifier le commentaire !');
+        }else {
+            header('Location: index.php?action=post&id='. $postId);
+        }
+    }else{
+        throw new Exception('Vous n\'etes pas identifié pour modifier le commentaire');
     }
+
 }
 
 function login($pseudo,$password){
