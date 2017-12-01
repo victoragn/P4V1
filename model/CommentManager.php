@@ -45,11 +45,10 @@ class CommentManager extends Manager{
         return $comment;
     }
     
-    public function updateComment($commentId, $author_id, $comment){
+    public function updateComment($commentId, $comment){
         $db = $this->dbConnect();
-        $req = $db->prepare('UPDATE comments SET author_id= :authorId, comment= :comment, comment_date=NOW() WHERE comment_id= :comment_id');
+        $req = $db->prepare('UPDATE comments SET comment= :comment, comment_date=NOW() WHERE comment_id= :comment_id');
         $affectedLines =$req->execute(array(
-            'authorId' => $author_id,
             'comment' => $comment,
             'comment_id' => $commentId
         ));

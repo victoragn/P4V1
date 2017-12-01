@@ -34,11 +34,11 @@ function addComment($postId, $author, $comment){
     }
 }
 
-function updateComment($commentId, $author, $comment){
+function updateComment($commentId, $comment){
     $commentManager = new CommentManager();
     
     $postId=$commentManager->getPostIdByCommentId($commentId);
-    $affectedLines = $commentManager->updateComment($commentId, $author, $comment);
+    $affectedLines = $commentManager->updateComment($commentId, $comment);
 
     if ($affectedLines === false) {
         throw new Exception('Impossible de modifier le commentaire !');

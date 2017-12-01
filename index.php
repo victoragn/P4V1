@@ -30,6 +30,16 @@ try {
             }else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
+        }elseif ($_GET['action'] == 'updateComment') {
+            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
+                if (isset($_POST['modifComment'])) {
+                    updateComment($_GET['commentId'], $_POST['modifComment']);
+                }else {
+                    throw new Exception('Pas de commentaire modifié envoyé');
+                }
+            }else {
+                throw new Exception('Le numéro de commentaire à mettre à jour est invalide');
+            }
         }elseif ($_GET['action'] == 'disconnect') {
             $_SESSION = array();
             session_destroy();

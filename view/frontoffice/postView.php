@@ -32,14 +32,19 @@
 <?php
 foreach ($comments as &$comment){
 ?>
-<div class='commentAndAuthor'>
-<p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate();
-    if($comment->authorId()==$_SESSION['author_id']){
-        ?><button class="btnModifComment" >Modifier</button> <?php
-    }
-    ?></p>
+<div id=<?= 'divComment'. $comment->id(); ?> class='divComment'>
+    <p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate();
+        if(isset($_SESSION['author_id'])){
+            if($comment->authorId()==$_SESSION['author_id']){
+                ?><button class="btnModifComment" >Modifier</button> <?php
+            }
+        }
+        ?>
+    </p>
     <p class='contentComment'><?= $comment->comment(); ?></p>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="../P4V1/public/js/script.js"></script>
 <?php
 }
 ?>
