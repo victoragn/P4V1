@@ -13,6 +13,9 @@
         <div>
             <input type="submit" value="Connexion"/>
         </div>
+        <div>
+            <a href="register.php">S'inscrire</a>
+        </div>
     </form>
 
 

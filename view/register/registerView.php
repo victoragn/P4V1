@@ -9,6 +9,8 @@
         <?php 
             if (isset($userAlreadyExistMessage)){echo $userAlreadyExistMessage;}
             if (isset($mailAlreadyExistMessage)){echo $mailAlreadyExistMessage;}
+            if (isset($differentPassword)){echo $differentPasswordMessage;}
+            if (isset($checkCaptcha)){echo $checkCaptchaMessage;}
             $messChampVide='<span class="messChampVide" id="messPseudoVide">Vous devez remplir ce champ</span>';
         ?>
     </div>

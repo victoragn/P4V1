@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title><?= $title ?></title>
         <link href="/P4V1/public/css/styles.css" rel="stylesheet" /> 
+        <script src='https://www.google.com/recaptcha/api.js'></script>
     </head>
         
     <body>
