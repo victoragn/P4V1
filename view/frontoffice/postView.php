@@ -37,7 +37,7 @@ foreach ($comments as &$comment){
     <p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate();
         if(isset($_SESSION['author_id'])){
             if($comment->authorId()==$currentUser->id()||$currentUser->role()==1){
-                ?><button class="btnModifComment" >Modifier</button> <?php
+                ?><button class="btnModifComment" >Modifier</button><button class="btnDeleteComment" >Supprimer</button> <?php
             }
         }
         ?>

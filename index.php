@@ -21,7 +21,13 @@ try {
             listPosts();
         }elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
-                post();
+                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] > 0){
+                    deleteComment(htmlspecialchars($_GET['deleteComment']));
+                    header('Location:'.$_SERVER['PHP_SELF'].'?action=post&id='.htmlspecialchars($_GET['id']));
+                    die;
+                }else{
+                    post();
+                }
             }else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }

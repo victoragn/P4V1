@@ -32,9 +32,12 @@ class CommentManager extends Manager{
         );
         $req->execute(array($commentId));
         $result = $req->fetch();
-        $comment=new Comment($result);
-        
-        return $comment;
+        if ($result==false){
+            throw new Exception('Ce commentaire n\'existe pas ou plus');
+        }else{
+            $comment=new Comment($result);
+            return $comment;
+        }
     }
 
     public function postComment($postId, $authorId, $comment){
@@ -64,7 +67,12 @@ class CommentManager extends Manager{
         return $postId;
     }
 
-    public function getAuthorByComment($comment){
+    public function deleteComment($comment){
+        $db = $this->dbConnect();
+        $commentId=$comment->id();
+        $req = $db->prepare('DELETE FROM comments WHERE comment_id= :comment_id');
+        $affectedLines =$req->execute(array('comment_id' => $commentId));
 
+        return $affectedLines;
     }
 }

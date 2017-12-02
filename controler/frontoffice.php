@@ -79,3 +79,21 @@ function getUserByComment($comment){
     $user=$userManager->getUserById($authorId);
     return $user;
 }
+
+function deleteComment($commentId){
+    global $currentUser;
+    $commentManager=new CommentManager();
+    $comment=$commentManager->getComment($commentId);
+    if (!isset($currentUser)){
+        throw new Exception('Vous devez vous authentifier !');
+    }else{
+        if ($comment->authorId()!=$currentUser->id()&&$currentUser->role()!=1){
+            throw new Exception('Vous n\'avez pas le droit de supprimer ce commentaire');
+        }else{
+            $result=$commentManager->deleteComment($comment);
+            if($result===false){
+                throw new Exception('La suppression du commentaire à échoué !');
+            }
+        }
+    }
+}
