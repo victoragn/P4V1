@@ -2,6 +2,11 @@
 if(!isset($_SESSION)) {session_start();} 
 require('controler/frontoffice.php');
 
+if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
+        $currentUser=getUserById($_SESSION['author_id']);
+    }
+
+
 try {
      if(isset($_POST['pseudo'])||isset($_POST['password'])){//si retour du formulaire de login
         if(htmlspecialchars($_POST['pseudo'])!="" && htmlspecialchars($_POST['password'])!=""){

@@ -5,6 +5,10 @@ require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
 
+if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
+        $currentUser=getUserById($_SESSION['author_id']);
+    }
+
 function listPosts(){
     $postManager = new PostManager(); // Création d'un objet
     $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
@@ -36,9 +40,10 @@ function addComment($postId, $authorId, $commentContent){
 }
 
 function updateComment($commentId, $commentContent){
+    global $currentUser;
     $commentManager = new CommentManager();
     $comment=$commentManager->getComment($commentId);
-    if($comment->authorId()==$_SESSION['author_id']){
+    if($comment->authorId()==$currentUser->id()||$currentUser->role()==1){
         $postId=$comment->postId();
         $affectedLines = $commentManager->updateComment($commentId, $commentContent);
 

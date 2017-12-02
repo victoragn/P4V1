@@ -16,7 +16,10 @@
 </div>
 
 <h2>Commentaires</h2>
-<?php if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie?>
+<?php
+if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
+    $currentUser=getUserById($_SESSION['author_id']);
+?>
 
 <form action="index.php?action=addComment&amp;id=<?= $post->id(); ?>" method="post">
     <div>
@@ -32,10 +35,10 @@
 <?php
 foreach ($comments as &$comment){
 ?>
-<div id=<?= 'divComment'. $comment->id(); ?> class='divComment'>
+<div id="<?= 'divComment'. $comment->id(); ?>" class='divComment'>
     <p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate();
         if(isset($_SESSION['author_id'])){
-            if($comment->authorId()==$_SESSION['author_id']){
+            if($comment->authorId()==$currentUser->id()||$currentUser->role()==1){
                 ?><button class="btnModifComment" >Modifier</button> <?php
             }
         }
