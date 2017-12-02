@@ -17,9 +17,7 @@
 
 <h2>Commentaires</h2>
 <?php
-if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
-    $currentUser=getUserById($_SESSION['author_id']);
-?>
+if(isset($_SESSION['author_id'])){global $currentUser;//si la session est lancée est que l'id est définie?>
 
 <form action="index.php?action=addComment&amp;id=<?= $post->id(); ?>" method="post">
     <div>

@@ -5,10 +5,6 @@ require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
 require_once('model/UserManager.php');
 
-if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
-        $currentUser=getUserById($_SESSION['author_id']);
-    }
-
 function listPosts(){
     $postManager = new PostManager(); // Création d'un objet
     $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
@@ -20,15 +16,16 @@ function post(){
     $postManager = new PostManager();
     $commentManager = new CommentManager();
 
-    $post = $postManager->getPost($_GET['id']);
-    $comments = $commentManager->getComments($_GET['id']);
+    $post = $postManager->getPost(htmlspecialchars($_GET['id']));
+    $comments = $commentManager->getComments(htmlspecialchars($_GET['id']));
 
     require('view/frontoffice/postView.php');
 }
 
 function addComment($postId, $authorId, $commentContent){
+    global $currentUser;
     $commentManager = new CommentManager();
-    if($authorId==$_SESSION['author_id']){
+    if($authorId==$currentUser->id()){
         $affectedLines = $commentManager->postComment($postId, $authorId, $commentContent);
 
         if ($affectedLines === false) {

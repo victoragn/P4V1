@@ -1,7 +1,5 @@
 <?php
-if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
-        $currentUser=getUserById($_SESSION['author_id']);
-    }
+global $currentUser;
 ?>
 
 <div id="userHeader">
