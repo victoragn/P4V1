@@ -1,7 +1,7 @@
 <?php
 require_once("model/Manager.php");
 require_once("model/Comment.php");
-require_once("model/UserManager.php");
+/*require_once("model/UserManager.php");*/
 
 class CommentManager extends Manager{
     public function getComments($postId){
@@ -14,6 +14,25 @@ class CommentManager extends Manager{
             DESC'
         );
         $req->execute(array($postId));
+        $comments=array();
+        while ($data = $req->fetch()){
+            $comment=new Comment($data);
+            $comments[]=$comment;
+        }
+
+        return $comments;
+    }
+
+    public function getCommentsByUserId($userId){
+        $db = $this->dbConnect();
+        $req = $db->prepare(
+            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
+            FROM comments
+            WHERE author_id = ?
+            ORDER BY comment_date
+            DESC'
+        );
+        $req->execute(array($userId));
         $comments=array();
         while ($data = $req->fetch()){
             $comment=new Comment($data);

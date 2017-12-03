@@ -1,8 +1,4 @@
-<?php
-global $currentUser;
-?>
-
 <div id="userHeader">
-    <span id="pseudoHeader"><?= $currentUser->pseudo(); ?></span>
+    <span id="pseudoHeader"><?= $_SESSION['pseudo']; ?></span>
     <a href="index.php?action=disconnect">Se déconnecter</a>
 </div>

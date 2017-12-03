@@ -58,4 +58,12 @@ class UserManager extends Manager{
 
         return $result;
     }
+
+    public function deleteUser($userId){
+        $db = $this->dbConnect();
+        $req = $db->query('DELETE FROM users WHERE author_id = ?');
+        $result=$req->execute(array($userId));
+
+        return $result;
+    }
 }

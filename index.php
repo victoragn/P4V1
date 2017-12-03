@@ -4,6 +4,8 @@ require('controler/frontoffice.php');
 
 if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
         $currentUser=getUserById($_SESSION['author_id']);
+        $_SESSSION['role']=$currentUser->role();
+        $_SESSION['pseudo']=$currentUser->pseudo();
     }
 
 
@@ -55,6 +57,8 @@ try {
             $_SESSION = array();
             session_destroy();
             header('Location: index.php');
+        }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>0) {
+            deleteUser(htmlspecialchars($_GET['userId']));
         }
     }
     else {//Si GETaction n'est pas defini, on est sur l'accueil du blog

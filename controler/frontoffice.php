@@ -23,9 +23,8 @@ function post(){
 }
 
 function addComment($postId, $authorId, $commentContent){
-    global $currentUser;
     $commentManager = new CommentManager();
-    if($authorId==$currentUser->id()){
+    if($authorId==$_SESSION['author_id']){
         $affectedLines = $commentManager->postComment($postId, $authorId, $commentContent);
 
         if ($affectedLines === false) {
@@ -37,10 +36,9 @@ function addComment($postId, $authorId, $commentContent){
 }
 
 function updateComment($commentId, $commentContent){
-    global $currentUser;
     $commentManager = new CommentManager();
     $comment=$commentManager->getComment($commentId);
-    if($comment->authorId()==$currentUser->id()||$currentUser->role()==1){
+    if($comment->authorId()==$_SESSION['author_id']||$_SESSION['role']==1){
         $postId=$comment->postId();
         $affectedLines = $commentManager->updateComment($commentId, $commentContent);
 
@@ -63,6 +61,7 @@ function login($pseudo,$password){
         throw new Exception('Mauvais identifiant ou mot de passe');
     }else{
         $_SESSION['author_id'] = $result['id'];
+        header('Location: index.php');
     }
 }
 
@@ -80,19 +79,46 @@ function getUserByComment($comment){
     return $user;
 }
 
+function getCommentsByUserId($userId){
+    $commentManager=new CommentManager();
+    $comments=$commentManager->getCommentsByUserId($userId);
+
+    return $comments;
+}
+
+
 function deleteComment($commentId){
-    global $currentUser;
     $commentManager=new CommentManager();
     $comment=$commentManager->getComment($commentId);
-    if (!isset($currentUser)){
+    if (!isset($_SESSION['author_id'])){
         throw new Exception('Vous devez vous authentifier !');
     }else{
-        if ($comment->authorId()!=$currentUser->id()&&$currentUser->role()!=1){
+        if ($comment->authorId()!=$_SESSION['author_id']&&$_SESSION['role']!=1){
             throw new Exception('Vous n\'avez pas le droit de supprimer ce commentaire');
         }else{
             $result=$commentManager->deleteComment($comment);
             if($result===false){
                 throw new Exception('La suppression du commentaire à échoué !');
+            }
+        }
+    }
+}
+
+function deleteUser($userId){
+    if (!isset($_SESSION['author_id'])){
+        throw new Exception('Vous devez vous authentifier !');
+    }else{
+        if ($_SESSION['author_id']!=$userId && $_SESSION['role']!=1){
+            throw new Exception('Vous n\'avez pas le droit de supprimer ce compte d\'utilisateur');
+        }else{
+            $userManager=new UserManager();
+            $comments=getCommentsByUserId($userId);
+            foreach ($comments as &$comment){
+                deleteComment($comment->id());
+            }
+            $result=$userManager->deleteUser($userId);
+            if($result==false){
+                throw new Exception('La suppression de l\'utilisateur à échoué !');
             }
         }
     }

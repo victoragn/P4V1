@@ -18,7 +18,7 @@ $('.btnDeleteComment').each(function() {/*créer un bouton "modifier" à coté d
             document.location.href=$(location).attr('href')+'&deleteComment='+idComment;
         });
         $('.noDelete').click(function(){
-           document.location.href=$(location).attr('href');
+            document.location.href=$(location).attr('href');
         });
         $('.btnModifComment').remove();/*retire les autres boutons "modifier" et "supprimer" pour ne pas pouvoir changer plusieurs comment en meme temps*/
         $('.btnDeleteComment').remove();
