@@ -28,12 +28,12 @@ class User{
       }
     }
 
-    public function id(){ return $this->_id; }
-    public function pseudo(){ return $this->_pseudo;}
-    public function password(){ return $this->_password;}
-    public function email(){ return $this->_email;}
-    public function registerDate(){ return $this->_registerDate;}
-    public function role(){ return $this->_role;}
+    public function getId(){ return $this->_id; }
+    public function getPseudo(){ return $this->_pseudo;}
+    public function getPassword(){ return $this->_password;}
+    public function getEmail(){ return $this->_email;}
+    public function getRegisterDate(){ return $this->_registerDate;}
+    public function getRole(){ return $this->_role;}
 
     public function setId($id){$this->_id=(int) $id;}
     public function setPseudo($pseudo){

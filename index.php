@@ -3,7 +3,7 @@ if(!isset($_SESSION)) {session_start();}
 require('controler/frontoffice.php');
 
 if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
-        getCurrentUSer($_SESSION['author_id']);
+        setCurrentUSer($_SESSION['author_id']);
     }
 
 

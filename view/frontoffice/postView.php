@@ -6,12 +6,12 @@
 
 <div class="news">
     <h3>
-        <?= $post->title(); ?>
-        <em>le <?= $post->creationDate(); ?></em>
+        <?= $post->getTitle(); ?>
+        <em>le <?= $post->getCreationDate(); ?></em>
     </h3>
             
     <p>
-        <?= $post->content(); /*nl2br met les retours à la ligne*/ ?>
+        <?= $post->getContent(); /*nl2br met les retours à la ligne*/ ?>
     </p>
 </div>
 
@@ -19,7 +19,7 @@
 <?php
 if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie?>
 
-<form action="index.php?action=addComment&amp;id=<?= $post->id(); ?>" method="post">
+<form action="index.php?action=addComment&amp;id=<?= $post->getId(); ?>" method="post">
     <div>
         <label for="comment">Ajoutez votre commentaire</label><br />
         <textarea id="comment" name="comment"></textarea>
@@ -33,16 +33,16 @@ if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est d
 <?php
 foreach ($comments as &$comment){
 ?>
-<div id="<?= 'divComment'. $comment->id(); ?>" class='divComment'>
-    <p><strong><?= getUserByComment($comment)->pseudo(); ?></strong> le <?= $comment->commentDate();
+<div id="<?= 'divComment'. $comment->getId(); ?>" class='divComment'>
+    <p><strong><?= getUserByComment($comment)->getPseudo(); ?></strong> le <?= $comment->getCommentDate();
         if(isset($_SESSION['author_id'])){
-            if($comment->authorId()==$_SESSION['author_id']||$_SESSION['role']==1){
+            if($comment->getAuthorId()==$_SESSION['author_id']||$_SESSION['role']==1){
                 ?><button class="btnModifComment" >Modifier</button><button class="btnDeleteComment" >Supprimer</button> <?php
             }
         }
         ?>
     </p>
-    <p class='contentComment'><?= $comment->comment(); ?></p>
+    <p class='contentComment'><?= $comment->getComment(); ?></p>
 </div>
 
 <?php

@@ -25,9 +25,9 @@ class PostManager extends Manager{
 
     public function postPost($post){
         $arrayPost=[
-            'title' => $post->title(),
-            'content' => $post->content(),
-            'creationDate' => $post->creationDate()
+            'title' => $post->getTitle(),
+            'content' => $post->getContent(),
+            'creationDate' => $post->getCreationDate()
         ];
 
         $db = $this->dbConnect();

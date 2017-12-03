@@ -10,14 +10,14 @@ foreach ($posts as &$post){
 ?>
     <div class="news">
         <h3>
-            <?= $post->title(); ?>
-            <em>le <?= $post->creationDate(); ?></em>
+            <?= $post->getTitle(); ?>
+            <em>le <?= $post->getCreationDate(); ?></em>
         </h3>
         
         <p>
-            <?= $post->content(); ?>
+            <?= $post->getContent(); ?>
             <br />
-            <em><a href="index.php?action=post&id=<?= $post->id(); ?>">Commentaires</a></em>
+            <em><a href="index.php?action=post&id=<?= $post->getId(); ?>">Commentaires</a></em>
         </p>
     </div>
 <?php

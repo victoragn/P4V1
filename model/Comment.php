@@ -27,11 +27,11 @@ class Comment{
       }
     }
 
-    public function id(){ return $this->_id; }
-    public function postId(){ return $this->_postId;}
-    public function authorId(){ return $this->_authorId;}
-    public function comment(){ return $this->_comment;}
-    public function commentDate(){ return $this->_commentDate;}
+    public function getId(){ return $this->_id; }
+    public function getPostId(){ return $this->_postId;}
+    public function getAuthorId(){ return $this->_authorId;}
+    public function getComment(){ return $this->_comment;}
+    public function getCommentDate(){ return $this->_commentDate;}
 
     public function setId($id){$this->_id=(int) $id;}
     public function setPostId($postId){$this->_postId=(int) $postId;}

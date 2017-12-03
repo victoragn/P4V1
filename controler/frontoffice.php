@@ -38,8 +38,8 @@ function addComment($postId, $authorId, $commentContent){
 function updateComment($commentId, $commentContent){
     $commentManager = new CommentManager();
     $comment=$commentManager->getComment($commentId);
-    if($comment->authorId()==$_SESSION['author_id']||$_SESSION['role']==1){
-        $postId=$comment->postId();
+    if($comment->getAuthorId()==$_SESSION['author_id']||$_SESSION['role']==1){
+        $postId=$comment->getPostId();
         $affectedLines = $commentManager->updateComment($commentId, $commentContent);
 
         if ($affectedLines === false) {
@@ -65,16 +65,16 @@ function login($pseudo,$password){
     }
 }
 
-function getCurrentUser($userId){
+function setCurrentUser($userId){
     $userManager= new UserManager();
     $user= $userManager->getUserById($userId);
-    $_SESSSION['role']=$user->role();
-    $_SESSION['pseudo']=$user->pseudo();
+    $_SESSION['role']=$user->getRole();
+    $_SESSION['pseudo']=$user->getPseudo();
 }
 
 function getUserByComment($comment){
     $userManager=new UserManager();
-    $authorId = $comment->authorId();
+    $authorId = $comment->getAuthorId();
     $user=$userManager->getUserById($authorId);
     return $user;
 }
@@ -93,7 +93,7 @@ function deleteComment($commentId){
     if (!isset($_SESSION['author_id'])){
         throw new Exception('Vous devez vous authentifier !');
     }else{
-        if ($comment->authorId()!=$_SESSION['author_id']&&$_SESSION['role']!=1){
+        if ($comment->getAuthorId()!=$_SESSION['author_id']&&$_SESSION['role']!=1){
             throw new Exception('Vous n\'avez pas le droit de supprimer ce commentaire');
         }else{
             $result=$commentManager->deleteComment($comment);
@@ -114,7 +114,7 @@ function deleteUser($userId){
             $userManager=new UserManager();
             $comments=getCommentsByUserId($userId);
             foreach ($comments as &$comment){
-                deleteComment($comment->id());
+                deleteComment($comment->getId());
             }
             $result=$userManager->deleteUser($userId);
             if($result==false){

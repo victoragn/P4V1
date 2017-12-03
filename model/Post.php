@@ -25,10 +25,10 @@ class Post{
       }
     }
 
-    public function id(){ return $this->_id; }
-    public function title(){ return $this->_title;}
-    public function content(){ return $this->_content;}
-    public function creationDate(){ return $this->_creationDate;}
+    public function getId(){ return $this->_id; }
+    public function getTitle(){ return $this->_title;}
+    public function getContent(){ return $this->_content;}
+    public function getCreationDate(){ return $this->_creationDate;}
 
     public function setId($id){$this->_id=(int) $id;}
     public function setTitle($title){
