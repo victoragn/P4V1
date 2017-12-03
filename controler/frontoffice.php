@@ -65,11 +65,11 @@ function login($pseudo,$password){
     }
 }
 
-function getUserById($userId){
+function getCurrentUser($userId){
     $userManager= new UserManager();
     $user= $userManager->getUserById($userId);
-
-    return $user;
+    $_SESSSION['role']=$user->role();
+    $_SESSION['pseudo']=$user->pseudo();
 }
 
 function getUserByComment($comment){
