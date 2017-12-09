@@ -24,3 +24,21 @@ $('.btnDeleteComment').each(function() {/*créer un bouton "modifier" à coté d
         $('.btnDeleteComment').remove();
     });
 });
+
+$('.btnDeletePost').each(function() {
+    $(this).click( function() {
+        var lignePost=$(this).parents('tr');
+        console.log(lignePost);
+        var idPost=lignePost.attr('id').substr(4);/*récupère l'id de la div du commentaire pour récuperer l'id du commentaire en question*/
+        console.log(idPost);
+        $('<tr><td colspan="4">Etes-vous sur de vouloir supprimer cet article ? (Cela supprimera aussi tous les commentaires associés)<button class="yesDelete">Oui</button><button class="noDelete">Non</button></td></tr>').insertAfter(lignePost);
+        $('.yesDelete').click(function(){
+            document.location.href='index.php?action=deletePost&postId='+idPost;
+        });
+        $('.noDelete').click(function(){
+            document.location.href=$(location).attr('href');
+        });
+        $('.btnModifPost').remove();
+        $('.btnDeletePost').remove();
+    });
+});

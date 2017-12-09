@@ -8,8 +8,7 @@ require_once('model/UserManager.php');
 function listPosts(){
     $postManager = new PostManager(); // Création d'un objet
     $posts = $postManager->getPosts(); // Appel d'une fonction de cet objet
-    
-    require('view/frontoffice/listPostsView.php');
+    return $posts;
 }
 
 function post(){

@@ -5,6 +5,8 @@ class Post{
     private $_content;
     private $_creationDate;
 
+    private $_excerpt;
+
     public function __construct(){
         $nbArgs=func_num_args();
         $args=func_get_args()[0];
@@ -30,6 +32,8 @@ class Post{
     public function getContent(){ return $this->_content;}
     public function getCreationDate(){ return $this->_creationDate;}
 
+    public function getExcerpt(){ return $this->_excerpt;}
+
     public function setId($id){$this->_id=(int) $id;}
     public function setTitle($title){
         if(is_string($title) && strlen($title)<255){
@@ -39,6 +43,7 @@ class Post{
     public function setContent($content){
         if(is_string($content)){
             $this->_content=nl2br(htmlspecialchars($content));
+            $this->_excerpt=substr($this->_content,0,50);
         }
     }
     public function setcreationDate($creationDate){

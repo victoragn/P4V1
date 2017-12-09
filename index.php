@@ -22,7 +22,7 @@ try {
         }elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > 0) {
                 if(isset($_GET['deleteComment']) && $_GET['deleteComment'] > 0){
-                    deleteComment(htmlspecialchars($_GET['deleteComment']));
+                    supprComment(htmlspecialchars($_GET['deleteComment']));
                     header('Location:'.$_SERVER['PHP_SELF'].'?action=post&id='.htmlspecialchars($_GET['id']));
                     die;
                 }else{
@@ -51,16 +51,33 @@ try {
             }else {
                 throw new Exception('Le numéro de commentaire à mettre à jour est invalide');
             }
+
         }elseif ($_GET['action'] == 'disconnect') {
             $_SESSION = array();
             session_destroy();
             header('Location: index.php');
+
         }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>0) {
-            supprUser(htmlspecialchars($_GET['userId']));
+            deleteUser(htmlspecialchars($_GET['userId']));
+
+        }elseif ($_GET['action'] == 'dashboard') {
+            if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
+                throw new Exception('Vous n\'avez pas le droit d\'ouvrir le dashboard');
+            }else{
+                if (isset($_GET['page']) && $_GET['page']=='users') {
+                    require('view/backoffice/dashUsers.php');
+                }elseif (isset($_GET['page']) && $_GET['page']=='newPost') {
+                    require('view/backoffice/dashNewPost.php');
+                }else{
+                    $posts=listPosts();
+                    require('view/backoffice/dashPosts.php');
+                }
+            }
         }
     }
     else {//Si GETaction n'est pas defini, on est sur l'accueil du blog
-        listPosts();
+        $posts=listPosts();
+        require('view/frontoffice/listPostsView.php');
     }
 }
 catch(Exception $e) { // S'il y a eu une erreur, alors...
