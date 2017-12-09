@@ -36,7 +36,7 @@ function addComment($postId, $authorId, $commentContent){
     }
 }
 
-function updateComment($commentId, $commentContent){
+function modifComment($commentId, $commentContent){
     $commentManager = new CommentManager();
     $comment=$commentManager->getComment($commentId);
     if($comment->getAuthorId()==$_SESSION['author_id']||$_SESSION['role']==1){
@@ -51,7 +51,6 @@ function updateComment($commentId, $commentContent){
     }else{
         throw new Exception('Vous n\'etes pas identifié pour modifier le commentaire');
     }
-
 }
 
 function login($pseudo,$password){
@@ -80,15 +79,7 @@ function getUserByComment($comment){
     return $user;
 }
 
-function getCommentsByUserId($userId){
-    $commentManager=new CommentManager();
-    $comments=$commentManager->getCommentsByUserId($userId);
-
-    return $comments;
-}
-
-
-function deleteComment($commentId){
+function supprComment($commentId){
     $commentManager=new CommentManager();
     $comment=$commentManager->getComment($commentId);
     if (!isset($_SESSION['author_id'])){

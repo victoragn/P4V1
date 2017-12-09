@@ -44,7 +44,7 @@ try {
         }elseif ($_GET['action'] == 'updateComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
                 if (isset($_POST['modifComment'])) {
-                    updateComment($_GET['commentId'], $_POST['modifComment']);
+                    modifComment($_GET['commentId'], $_POST['modifComment']);
                 }else {
                     throw new Exception('Pas de commentaire modifié envoyé');
                 }
@@ -56,7 +56,7 @@ try {
             session_destroy();
             header('Location: index.php');
         }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>0) {
-            deleteUser(htmlspecialchars($_GET['userId']));
+            supprUser(htmlspecialchars($_GET['userId']));
         }
     }
     else {//Si GETaction n'est pas defini, on est sur l'accueil du blog
