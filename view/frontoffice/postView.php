@@ -50,7 +50,7 @@ foreach ($comments as &$comment){
 ?>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('/view/template.php'); ?>
+<?php require('templateIndex.php'); ?>
 
 
 
