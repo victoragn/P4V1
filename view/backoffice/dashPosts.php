@@ -6,7 +6,7 @@
 <a href="index.php">Retour à l'acceuil</a>
 
 <div>
-    <button onclick="window.location.href='index.php?action=dashboard&page=newPost'">Créer un nouvel article</button>
+    <a href="index.php?action=dashboard&page=newPost"><button>Créer un nouvel article</button></a>
     <table>
         <thead>
             <th>Titre de l'article</th>
@@ -21,7 +21,7 @@
             <tr id= "Post<?= $post->getId(); ?>">
                 <td> <?= $post->getTitle(); ?></td>
                 <td> <?= $post->getExcerpt(); ?></td>
-                <td><button class="btnModifPost" onclick="window.location.href='index.php?action=dashboard&page=modifPost&postId=<?=$post->getId()?>'">Modifier</button></td>
+                <td><button class="btnModifPost">Modifier</button></td>
                 <td><button class="btnDeletePost">Supprimer</button></td>
             </tr>
         <?php

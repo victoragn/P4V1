@@ -40,10 +40,13 @@ class Post{
             $this->_title=htmlspecialchars($title);
         }
     }
+    public function setExcerpt($excerpt){
+        $this->_excerpt=nl2br(htmlspecialchars($excerpt));
+    }
     public function setContent($content){
         if(is_string($content)){
             $this->_content=nl2br(htmlspecialchars($content));
-            $this->_excerpt=substr($this->_content,0,50);
+            $this->setExcerpt(substr($this->_content,0,50));
         }
     }
     public function setcreationDate($creationDate){

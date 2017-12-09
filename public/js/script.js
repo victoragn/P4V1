@@ -28,9 +28,7 @@ $('.btnDeleteComment').each(function() {/*créer un bouton "modifier" à coté d
 $('.btnDeletePost').each(function() {
     $(this).click( function() {
         var lignePost=$(this).parents('tr');
-        console.log(lignePost);
-        var idPost=lignePost.attr('id').substr(4);/*récupère l'id de la div du commentaire pour récuperer l'id du commentaire en question*/
-        console.log(idPost);
+        var idPost=lignePost.attr('id').substr(4);
         $('<tr><td colspan="4">Etes-vous sur de vouloir supprimer cet article ? (Cela supprimera aussi tous les commentaires associés)<button class="yesDelete">Oui</button><button class="noDelete">Non</button></td></tr>').insertAfter(lignePost);
         $('.yesDelete').click(function(){
             document.location.href='index.php?action=deletePost&postId='+idPost;
@@ -40,5 +38,14 @@ $('.btnDeletePost').each(function() {
         });
         $('.btnModifPost').remove();
         $('.btnDeletePost').remove();
+    });
+});
+
+$('.btnModifPost').each(function() {
+    $(this).click( function() {
+        var lignePost=$(this).parents('tr');
+        var idPost=lignePost.attr('id').substr(4);
+        console.log(idPost);
+        document.location.href='index.php?action=dashboard&page=modifPost&postId='+idPost;
     });
 });

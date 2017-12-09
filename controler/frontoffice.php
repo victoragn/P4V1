@@ -21,6 +21,12 @@ function post(){
     require('view/frontoffice/postView.php');
 }
 
+function newPost($title,$content){
+    $postManager=new PostManager();
+    $postManager->postPost($title,$content);
+    header('Location: index.php?action=dashboard');
+}
+
 function addComment($postId, $authorId, $commentContent){
     $commentManager = new CommentManager();
     if($authorId==$_SESSION['author_id']){

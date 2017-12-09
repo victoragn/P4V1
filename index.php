@@ -81,8 +81,16 @@ try {
                 }elseif (isset($_GET['page']) && $_GET['page']=='newPost') {
                     require('view/backoffice/dashNewPost.php');
                 }else{
-                    $posts=listPosts();
-                    require('view/backoffice/dashPosts.php');
+                    if(isset($_POST['newPost'])&&isset($_POST['titlePost'])){
+                        if(empty($_POST['newPost'])||empty($_POST['titlePost'])){
+
+                        }else{
+                            newPost($_POST['titlePost'],$_POST['newPost']);
+                        }
+                    }else{
+                        $posts=listPosts();
+                        require('view/backoffice/dashPosts.php');
+                    }
                 }
             }
         }
