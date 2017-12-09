@@ -3,7 +3,6 @@
 // Chargement des classes
 require_once('model/PostManager.php');
 require_once('model/CommentManager.php');
-require_once('model/UserManager.php');
 
 function listPosts(){
     $postManager = new PostManager(); // Création d'un objet

@@ -34,7 +34,7 @@ if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est d
 foreach ($comments as &$comment){
 ?>
 <div id="<?= 'divComment'. $comment->getId(); ?>" class='divComment'>
-    <p><strong><?= $userManager->getUserById($comment->getAuthorId())->getPseudo(); ?></strong> le <?= $comment->getCommentDate();
+    <p><strong><?= $comment->getUser()->getPseudo(); ?></strong> le <?= $comment->getCommentDate();
         if(isset($_SESSION['author_id'])){
             if($comment->getAuthorId()==$_SESSION['author_id']||$_SESSION['role']==1){
                 ?><button class="btnModifComment" >Modifier</button><button class="btnDeleteComment" >Supprimer</button> <?php

@@ -1,6 +1,9 @@
 <?php
+require_once('model/UserManager.php');
+
 class Comment{
-	private $_id;
+
+    private $_id;
     private $_postId;
     private $_authorId;
     private $_comment;
@@ -43,5 +46,11 @@ class Comment{
     }
     public function setcommentDate($commentDate){
             $this->_commentDate=$commentDate;
+    }
+
+    public function getUser(){
+        $userManager=new UserManager();
+        $user=$userManager->getUserById($this->getAuthorId());
+        return $user;
     }
 }
