@@ -96,21 +96,22 @@ function supprComment($commentId){
 }
 
 function deleteUser($userId){
-    if (!isset($_SESSION['author_id'])){
-        throw new Exception('Vous devez vous authentifier !');
-    }else{
-        if ($_SESSION['author_id']!=$userId && $_SESSION['role']!=1){
-            throw new Exception('Vous n\'avez pas le droit de supprimer ce compte d\'utilisateur');
-        }else{
-            $userManager=new UserManager();
-            $comments=getCommentsByUserId($userId);
-            foreach ($comments as &$comment){
-                deleteComment($comment->getId());
-            }
-            $result=$userManager->deleteUser($userId);
-            if($result==false){
-                throw new Exception('La suppression de l\'utilisateur à échoué !');
-            }
-        }
+    $userManager=new UserManager();
+    $commentManager=new CommentManager();
+    $comments=$commentManager->getCommentsByUserId($userId);
+    foreach ($comments as &$comment){
+        $commentManager->removeComment($comment->getId());
     }
+    $result=$userManager->removeUser($userId);
 }
+
+function deletePost($postId){
+    $postManager=new PostManager();
+    $commentManager=new CommentManager();
+    $comments=$commentManager->getComments($postId);
+    foreach ($comments as &$comment){
+        $commentManager->removeComment($comment->getId());
+    }
+    $result=$postManager->removePost($postId);
+}
+

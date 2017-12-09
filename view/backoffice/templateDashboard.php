@@ -4,6 +4,12 @@
         <meta charset="utf-8" />
         <title><?= $title ?></title>
         <link href="/P4V1/public/css/styles.css" rel="stylesheet" />
+        <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+        <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+        </script>
     </head>
 
     <body>

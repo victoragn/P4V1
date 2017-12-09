@@ -20,8 +20,8 @@ try {
         if ($_GET['action'] == 'listPosts') {
             listPosts();
         }elseif ($_GET['action'] == 'post') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
-                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] > 0){
+            if (isset($_GET['id']) && $_GET['id'] > -1) {
+                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] > -1){
                     supprComment(htmlspecialchars($_GET['deleteComment']));
                     header('Location:'.$_SERVER['PHP_SELF'].'?action=post&id='.htmlspecialchars($_GET['id']));
                     die;
@@ -32,7 +32,7 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }elseif ($_GET['action'] == 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > 0) {
+            if (isset($_GET['id']) && $_GET['id'] > -1) {
                 if (!empty($_POST['comment'])&&isset($_SESSION['author_id'])) {
                     addComment($_GET['id'], $_SESSION['author_id'] , $_POST['comment']);
                 }else {
@@ -42,7 +42,7 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }elseif ($_GET['action'] == 'updateComment') {
-            if (isset($_GET['commentId']) && $_GET['commentId'] > 0) {
+            if (isset($_GET['commentId']) && $_GET['commentId'] > -1) {
                 if (isset($_POST['modifComment'])) {
                     modifComment($_GET['commentId'], $_POST['modifComment']);
                 }else {
@@ -57,8 +57,20 @@ try {
             session_destroy();
             header('Location: index.php');
 
-        }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>0) {
-            deleteUser(htmlspecialchars($_GET['userId']));
+        }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>-1) {
+            if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
+                throw new Exception('Vous n\'avez pas le droit de supprimer un utilisateur');
+            }else{
+                deleteUser(htmlspecialchars($_GET['userId']));
+            }
+
+        }elseif ($_GET['action'] == 'deletePost' && isset($_GET['postId']) && $_GET['postId']>-1) {
+            if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
+                throw new Exception('Vous n\'avez pas le droit de supprimer cet article');
+            }else{
+                deletePost(htmlspecialchars($_GET['postId']));
+                header('Location: index.php?action=dashboard');
+            }
 
         }elseif ($_GET['action'] == 'dashboard') {
             if(!isset($_SESSION['role'])||$_SESSION['role']!=1){

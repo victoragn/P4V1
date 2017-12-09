@@ -102,12 +102,12 @@ class CommentManager extends Manager{
         }
     }
 
-    public function deleteComment($comment){
+    public function removeComment($commentId){
         $db = $this->dbConnect();
         $req = $db->prepare('DELETE FROM comments WHERE comment_id= :comment_id');
-        $req->execute(array('comment_id' => $comment->getId()));
+        $req->execute(array('comment_id' => $commentId));
         if($req==false){
-            throw new Exception('La requete de deleteComment a echouée !');
+            throw new Exception('La requete de removeComment a echouée !');
         }else{
             return $req;
         }

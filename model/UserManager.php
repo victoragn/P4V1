@@ -75,12 +75,12 @@ class UserManager extends Manager{
         }
     }
 
-    public function deleteUser($userId){
+    public function removeUser($userId){
         $db = $this->dbConnect();
         $req = $db->query('DELETE FROM users WHERE author_id = ?');
         $req->execute(array($userId));
         if($req==false){
-            throw new Exception('La requete de deleteUser a echouée !');
+            throw new Exception('La requete de removeUser a echouée !');
         }else{
             return $req;
         }

@@ -47,4 +47,15 @@ class PostManager extends Manager{
             return $req;
         }
     }
+
+    public function removePost($postId){
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM posts WHERE post_id= ?');
+        $req->execute(array($postId));
+        if($req==false){
+            throw new Exception('La requete deremovePost a echouée !');
+        }else{
+            return $req;
+        }
+    }
 }
