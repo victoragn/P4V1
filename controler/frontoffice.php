@@ -27,6 +27,18 @@ function newPost($title,$content){
     header('Location: index.php?action=dashboard');
 }
 
+function modifPost($postId,$postTitle,$postContent){
+    $postManager=new PostManager();
+    $postManager->editPost($postId,$postTitle,$postContent);
+    header('Location: index.php?action=dashboard');
+}
+
+function getEditPost(){
+    $postManager=new PostManager();
+    $post=$postManager->getPost(intval($_GET['postId']));
+    require('view/backoffice/dashEditPost.php');
+}
+
 function addComment($postId, $authorId, $commentContent){
     $commentManager = new CommentManager();
     if($authorId==$_SESSION['author_id']){

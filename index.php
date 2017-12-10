@@ -21,7 +21,7 @@ try {
             listPosts();
         }elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > -1) {
-                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] > -1){
+                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] >=0){
                     supprComment(htmlspecialchars($_GET['deleteComment']));
                     header('Location:'.$_SERVER['PHP_SELF'].'?action=post&id='.htmlspecialchars($_GET['id']));
                     die;
@@ -32,7 +32,7 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }elseif ($_GET['action'] == 'addComment') {
-            if (isset($_GET['id']) && $_GET['id'] > -1) {
+            if (isset($_GET['id']) && $_GET['id'] >=0) {
                 if (!empty($_POST['comment'])&&isset($_SESSION['author_id'])) {
                     addComment($_GET['id'], $_SESSION['author_id'] , $_POST['comment']);
                 }else {
@@ -42,7 +42,7 @@ try {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
         }elseif ($_GET['action'] == 'updateComment') {
-            if (isset($_GET['commentId']) && $_GET['commentId'] > -1) {
+            if (isset($_GET['commentId']) && $_GET['commentId'] >=0) {
                 if (isset($_POST['modifComment'])) {
                     modifComment($_GET['commentId'], $_POST['modifComment']);
                 }else {
@@ -57,14 +57,14 @@ try {
             session_destroy();
             header('Location: index.php');
 
-        }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>-1) {
+        }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>=0) {
             if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
                 throw new Exception('Vous n\'avez pas le droit de supprimer un utilisateur');
             }else{
                 deleteUser(htmlspecialchars($_GET['userId']));
             }
 
-        }elseif ($_GET['action'] == 'deletePost' && isset($_GET['postId']) && $_GET['postId']>-1) {
+        }elseif ($_GET['action'] == 'deletePost' && isset($_GET['postId']) && $_GET['postId']>=0) {
             if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
                 throw new Exception('Vous n\'avez pas le droit de supprimer cet article');
             }else{
@@ -72,18 +72,29 @@ try {
                 header('Location: index.php?action=dashboard');
             }
 
-        }elseif ($_GET['action'] == 'dashboard') {
+        }elseif ($_GET['action'] == 'dashboard') { // accès au dashboard par l'admin
             if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
                 throw new Exception('Vous n\'avez pas le droit d\'ouvrir le dashboard');
             }else{
-                if (isset($_GET['page']) && $_GET['page']=='users') {
+                if (isset($_GET['page']) && $_GET['page']=='users') { //gerer les membres
                     require('view/backoffice/dashUsers.php');
-                }elseif (isset($_GET['page']) && $_GET['page']=='newPost') {
+                }elseif (isset($_GET['page']) && $_GET['page']=='newPost') { // Créer un nouvel article
                     require('view/backoffice/dashNewPost.php');
+                }elseif (isset($_GET['page']) && $_GET['page']=='modifPost') { // Mofifier un article
+                    if(isset($_GET['postId']) && $_GET['postId']>=0){
+                        getEditPost();
+                    }else{
+                        header('Location: index.php?action=dashboard');
+                    }
+                }elseif (isset($_GET['editPost']) && $_GET['editPost']>=0) { // Créer un nouvel article
+                    modifPost($_GET['editPost'],$_POST['titlePost'],$_POST['editedPost']);
                 }else{
                     if(isset($_POST['newPost'])&&isset($_POST['titlePost'])){
                         if(empty($_POST['newPost'])||empty($_POST['titlePost'])){
-
+                            $postTitle=$_POST['titlePost'];
+                            $postContent=$_POST['newPost'];
+                            $champVide=true;
+                            require('view/backoffice/dashNewPost.php');
                         }else{
                             newPost($_POST['titlePost'],$_POST['newPost']);
                         }

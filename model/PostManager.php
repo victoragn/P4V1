@@ -47,6 +47,23 @@ class PostManager extends Manager{
         }
     }
 
+    public function editPost($postId,$postTitle,$postContent){
+        $arrayPost=[
+            'title' => htmlspecialchars($postTitle),
+            'content' => $postContent,
+            'postId' => $postId
+        ];
+
+        $db = $this->dbConnect();
+        $req = $db->prepare('UPDATE posts SET post_title= :title, post_content= :content WHERE post_id= :postId');
+        $req->execute($arrayPost);
+        if($req==false){
+            throw new Exception('La requete de editPost a echouée !');
+        }else{
+            return $req;
+        }
+    }
+
     public function removePost($postId){
         $db = $this->dbConnect();
         $req = $db->prepare('DELETE FROM posts WHERE post_id= ?');
