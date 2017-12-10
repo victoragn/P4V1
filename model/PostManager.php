@@ -34,7 +34,7 @@ class PostManager extends Manager{
     public function postPost($title,$content){
         $arrayPost=[
             'title' => htmlspecialchars($title),
-            'content' => nl2br(htmlspecialchars($content))
+            'content' => $content
         ];
 
         $db = $this->dbConnect();

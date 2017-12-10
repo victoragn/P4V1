@@ -38,15 +38,17 @@ class Post{
     public function setTitle($title){
         if(is_string($title) && strlen($title)<255){
             $this->_title=htmlspecialchars($title);
+        }else{
+            throw new Exception('Le titre doit contenir moins de 255 caractères');
         }
     }
-    public function setExcerpt($excerpt){
-        $this->_excerpt=nl2br(htmlspecialchars($excerpt));
+    public function setExcerpt($content){
+        $this->_excerpt=substr(strip_tags($content),0,50);
     }
     public function setContent($content){
         if(is_string($content)){
-            $this->_content=nl2br(htmlspecialchars($content));
-            $this->setExcerpt(substr($this->_content,0,50));
+            $this->_content=$content;
+            $this->setExcerpt($this->getContent());
         }
     }
     public function setcreationDate($creationDate){
