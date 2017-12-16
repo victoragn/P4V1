@@ -1,7 +1,5 @@
 <?php
-
 // Chargement des classes
-require_once('model/UserManager.php');
 require_once('controler/frontoffice.php');
 require_once('controler/recaptchalib.php');
 $siteKey = '6LfSVzoUAAAAADOuqcN9fTrBWdm5S-rKPfdM95uB'; // votre clé publique
@@ -24,7 +22,7 @@ $userAlreadyExist;
 $mailAlreadyExist;
 $differentPassword;
 
-function getForm(){
+function getForm(){//affiche le formulaire du register (avant et apres l'avoir rempli)
     global $userAlreadyExist,$mailAlreadyExist,$differentPassword,$checkCaptcha;
     $pseudoColor="fondBlanc";
     $pwd1Color="fondBlanc";
@@ -59,7 +57,7 @@ function getForm(){
     require('view/register/registerView.php');
 }
 
-function checkUserAlreadyExist($pseudo,$password1,$password2,$email){
+function checkUserAlreadyExist($pseudo,$password1,$password2,$email){//vérifie les valeurs retour du formulaire avant de le réafficher avec getForm
     global $userAlreadyExist,$mailAlreadyExist,$differentPassword,$checkCaptcha; //global vars to go to getForm()
     $pseudo=strtolower($pseudo);//pseudo in lowercase for checking in DB
     $email=strtolower($email);
@@ -78,15 +76,10 @@ function checkUserAlreadyExist($pseudo,$password1,$password2,$email){
         $mailAlreadyExist=$check_result[1];
 
         if ($check_result==[0,0] && $differentPassword==0 && $checkCaptcha==1){
-            $hash_password= password_hash($password, PASSWORD_DEFAULT);
-            $affectedLines = $userManager->addUser($pseudo,$hash_password,$email);
-            if ($affectedLines === false) {
-                throw new Exception('Impossible d\'ajouter le nouvel utilisateur !');
-            }else {
-                header('Location: index.php?action=disconnect');
-            }
+            $hash_password= password_hash($password1, PASSWORD_DEFAULT);
+            $userManager->addUser($pseudo,$hash_password,$email);
+            header('Location: index.php?action=disconnect');
         }
     }
-    
     getForm();
 }
