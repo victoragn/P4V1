@@ -87,8 +87,12 @@ try {
                 throw new Exception('Vous n\'avez pas le droit d\'ouvrir le dashboard');
             }else{
                 if (isset($_GET['page']) && $_GET['page']=='users') { //gerer les membres
-                    $users=allUsers();
-                    require('view/backoffice/dashUsers.php');
+                    if(isset($_GET['userId']) && $_GET['userId']>=0){
+                        modifUser(htmlspecialchars($_GET['userId']));
+                    }else{
+                        $users=allUsers();
+                        require('view/backoffice/dashUsers.php');
+                    }
                 }elseif (isset($_GET['page']) && $_GET['page']=='newPost') { // Créer un nouvel article
                     require('view/backoffice/dashNewPost.php');
                 }elseif (isset($_GET['page']) && $_GET['page']=='modifPost') { // Mofifier un article

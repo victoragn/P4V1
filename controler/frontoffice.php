@@ -135,6 +135,19 @@ function modifProfil(){
     require('view/frontoffice/profil.php');
 }
 
+function modifUser($userId){
+    $champPassVide=0;
+    $changePassDiff=0;
+    $modifEmail=0;
+    $userManager= new UserManager();
+    $user=$userManager->getUserById($userId);
+
+
+
+
+    require('view/backoffice/dashUserEdit.php');
+}
+
 function supprComment($commentId){
     $commentManager=new CommentManager();
     $comment=$commentManager->getComment($commentId);
@@ -144,7 +157,7 @@ function supprComment($commentId){
         if ($comment->getAuthorId()!=$_SESSION['author_id']&&$_SESSION['role']!=1){
             throw new Exception('Vous n\'avez pas le droit de supprimer ce commentaire');
         }else{
-            $result=$commentManager->deleteComment($comment);
+            $result=$commentManager->removeComment($comment->getId());
             if($result===false){
                 throw new Exception('La suppression du commentaire à échoué !');
             }

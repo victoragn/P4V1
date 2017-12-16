@@ -2,7 +2,7 @@
 
 <?php ob_start(); ?>
 <h1>Gestion des membres</h1>
-<a href="index.php?action=dashboard">Gerer les membres</a>
+<a href="index.php?action=dashboard">Gerer les articles</a>
 <a href="index.php">Retour à l'acceuil</a>
 
 <div>
@@ -22,8 +22,7 @@
                 <td> <?= $user->getId(); ?></td>
                 <td> <?= $user->getPseudo(); ?></td>
                 <td> <?= $user->getEmail(); ?></td>
-                <td><button class="btnModifPassUser">Modifier MDP</button></td>
-                <td><button class="btnDeleteUser">Supprimer</button></td>
+                <td><a href="index.php?action=dashboard&page=users&userId=<?= $user->getId(); ?>"><button class="btnModifUser">Modifier</button></a></td>
             </tr>
         <?php
         }
