@@ -95,6 +95,12 @@ function getUserByComment($comment){
     return $user;
 }
 
+function allUsers(){
+    $userManager=new UserManager();
+    $users=$userManager->getUsers();
+    return $users;
+}
+
 function modifProfil(){
     $champPassVide=0;
     $changePassDiff=0;

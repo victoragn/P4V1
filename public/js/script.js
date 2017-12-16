@@ -49,3 +49,16 @@ $('.btnModifPost').each(function() {
         document.location.href='index.php?action=dashboard&page=modifPost&postId='+idPost;
     });
 });
+
+$('.btnModifPassUser').each(function() {
+    $(this).click( function() {
+        var ligneUser=$(this).parents('tr');
+        var idUser=ligneUser.attr('id').substr(4);
+        /*$('<tr><td colspan="5"><label for="password1">Mot de passe</label><input id="password_input1" type="password" name="password1"/><br /><label for="password2">Retapez le mot de passe</label><input id="password_input2" type="password" name="password2"/><br /><button class="validPassword">Oui</button></td></tr>').insertAfter(ligneUser);
+        $('.validPassword').click(function(){
+            document.location.href='index.php?action=dashboard&dashAction=updatePassword&userId='+idPost;
+        });
+        $('.btnModifPassUser').remove();
+        $('.btnDeletePost').remove();*/
+    });
+});
