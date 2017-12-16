@@ -48,6 +48,18 @@ class UserManager extends Manager{
         }
     }
     
+    public function checkEmailAlreadyExist($email){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(*) FROM users WHERE email= :email');
+        $req->execute(array('email' => $email));
+        if($req==false){
+            throw new Exception('La requete de checkEmailAlreadyExist a echouée !');
+        }else{
+            $result = intval($req->fetch()[0]);
+            return $result;
+        }
+    }
+
     public function addUser($pseudo,$password,$email){
         $db = $this->dbConnect();
         $req = $db->prepare('INSERT INTO users(pseudo, password, email, register_date, role) VALUES(?, ?, ?, NOW(),0)');
@@ -72,6 +84,36 @@ class UserManager extends Manager{
                 "id" => $req['id']
             ];
             return $result;
+        }
+    }
+
+    public function updateUserEmail($email,$authorId){
+        $db = $this->dbConnect();
+        $arrayPost=[
+            'email' => $email,
+            'authorId' => $authorId
+        ];
+        $req = $db->prepare('UPDATE users SET email= :email WHERE author_id = :authorId');
+        $req->execute($arrayPost);
+        if($req==false){
+            throw new Exception('La requete de updateUserEmail a echouée !');
+        }else{
+            return $req;
+        }
+    }
+
+    public function updateUserPassword($password,$authorId){
+        $db = $this->dbConnect();
+        $arrayPost=[
+            'password' => $password,
+            'authorId' => $authorId
+        ];
+        $req = $db->prepare('UPDATE users SET password= :password WHERE author_id = :authorId');
+        $req->execute($arrayPost);
+        if($req==false){
+            throw new Exception('La requete de updateUserPassword a echouée !');
+        }else{
+            return $req;
         }
     }
 

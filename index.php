@@ -19,6 +19,7 @@ try {
     if (isset($_GET['action'])) {//Tous les cas où GETaction est défini
         if ($_GET['action'] == 'listPosts') {
             listPosts();
+
         }elseif ($_GET['action'] == 'post') {
             if (isset($_GET['id']) && $_GET['id'] > -1) {
                 if(isset($_GET['deleteComment']) && $_GET['deleteComment'] >=0){
@@ -31,6 +32,7 @@ try {
             }else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
+
         }elseif ($_GET['action'] == 'addComment') {
             if (isset($_GET['id']) && $_GET['id'] >=0) {
                 if (!empty($_POST['comment'])&&isset($_SESSION['author_id'])) {
@@ -41,6 +43,7 @@ try {
             }else {
                 throw new Exception('Aucun identifiant de billet envoyé');
             }
+
         }elseif ($_GET['action'] == 'updateComment') {
             if (isset($_GET['commentId']) && $_GET['commentId'] >=0) {
                 if (isset($_POST['modifComment'])) {
@@ -50,6 +53,13 @@ try {
                 }
             }else {
                 throw new Exception('Le numéro de commentaire à mettre à jour est invalide');
+            }
+
+        }elseif ($_GET['action'] == 'profil') {
+            if(isset($_SESSION['author_id'])){
+                modifProfil();
+            }else{
+                throw new Exception('Vous devez être identifié !');
             }
 
         }elseif ($_GET['action'] == 'disconnect') {

@@ -86,6 +86,7 @@ function setCurrentUser($userId){
     $user= $userManager->getUserById($userId);
     $_SESSION['role']=$user->getRole();
     $_SESSION['pseudo']=$user->getPseudo();
+    $_SESSION['email']=$user->getEmail();
 }
 
 function getUserByComment($comment){
@@ -93,6 +94,38 @@ function getUserByComment($comment){
     $authorId = $comment->getAuthorId();
     $user=$userManager->getUserById($authorId);
     return $user;
+}
+
+function modifProfil(){
+    $champPassVide=0;
+    $changePassDiff=0;
+    if(isset($_POST['oldPass'])){
+        $userManager= new UserManager();
+        if(isset($_POST['changeEmail'])&&$_POST['changeEmail']!=$_SESSION['email']){
+            $checkEmail=$userManager->checkEmailAlreadyExist($_POST['changeEmail']);
+            if($checkEmail==0){
+                $userManager->updateUserEmail($_POST['changeEmail'],$_SESSION['author_id']);
+                setCurrentUser($_SESSION['author_id']);
+            }
+        }
+        if(isset($_POST['oldPass'])&&isset($_POST['changePass1'])&&isset($_POST['changePass2'])&&(!empty($_POST['oldPass'])||!empty($_POST['changePass1'])||!empty($_POST['changePass2']))){
+            if($_POST['changePass1']!=$_POST['changePass2']){
+                $changePassDiff=1;
+            }else{
+                if(empty($_POST['oldPass'])||empty($_POST['changePass1'])||empty($_POST['changePass2'])){
+                    $champPassVide=1;
+                }else{
+                    $checkOldPass=$userManager->checkLogin($_SESSION['pseudo'],$_POST['oldPass'])['check'];
+                    var_dump($checkOldPass);
+                    if($checkOldPass==true){
+                        $hashPassword=password_hash($_POST['changePass1'], PASSWORD_DEFAULT);
+                        $userManager->updateUserPassword($hashPassword,$_SESSION['author_id']);
+                    }
+                }
+            }
+        }
+    }
+    require('view/frontoffice/profil.php');
 }
 
 function supprComment($commentId){

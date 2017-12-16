@@ -5,5 +5,6 @@
     <?php
     }
     ?>
+    <a href="index.php?action=profil">Gérer le profil</a>
     <a href="index.php?action=disconnect">Se déconnecter</a>
 </div>
