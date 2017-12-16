@@ -10,6 +10,8 @@
         if (isset($champPassVide) && $champPassVide==1){echo "Si vous souhaitez modifier le mot de passe, les 3 champs doivent être remplis !";}
         if (isset($champPassDiff) && $champPassDiff==1){echo "Les deux champs du nouveau mot de passe sont différents !";}
         if (isset($checkOldPass) && $checkOldPass==false){echo "L'ancien mot de passe est faux !";}
+        if (isset($modifPassword) && $modifPassword==1){echo "Le mot de passe a bien été modifié";}
+        if (isset($modifEmail) && $modifEmail==1){echo "L\'email a bien été modifié";}
     ?>
 </div>
 

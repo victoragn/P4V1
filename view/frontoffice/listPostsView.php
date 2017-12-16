@@ -17,7 +17,7 @@ foreach ($posts as &$post){
         <p>
             <?= $post->getContent(); ?>
             <br />
-            <em><a href="index.php?action=post&id=<?= $post->getId(); ?>">Commentaires</a></em>
+            <em><a href="index.php?action=post&id=<?= $post->getId(); ?>">Il y a <?= $post->getNbComment(); ?> commentaire(s)</a></em>
         </p>
     </div>
 <?php

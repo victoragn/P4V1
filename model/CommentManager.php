@@ -1,7 +1,6 @@
 <?php
 require_once("model/Manager.php");
 require_once("model/Comment.php");
-/*require_once("model/UserManager.php");*/
 
 class CommentManager extends Manager{
     public function getComments($postId){

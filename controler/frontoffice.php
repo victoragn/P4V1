@@ -2,7 +2,6 @@
 
 // Chargement des classes
 require_once('model/PostManager.php');
-require_once('model/CommentManager.php');
 
 function listPosts(){
     $postManager = new PostManager(); // Création d'un objet
@@ -99,12 +98,14 @@ function getUserByComment($comment){
 function modifProfil(){
     $champPassVide=0;
     $changePassDiff=0;
+    $modifEmail=0;
     if(isset($_POST['oldPass'])){
         $userManager= new UserManager();
         if(isset($_POST['changeEmail'])&&$_POST['changeEmail']!=$_SESSION['email']){
             $checkEmail=$userManager->checkEmailAlreadyExist($_POST['changeEmail']);
             if($checkEmail==0){
                 $userManager->updateUserEmail($_POST['changeEmail'],$_SESSION['author_id']);
+                $modifEmail=1;
                 setCurrentUser($_SESSION['author_id']);
             }
         }
@@ -116,10 +117,10 @@ function modifProfil(){
                     $champPassVide=1;
                 }else{
                     $checkOldPass=$userManager->checkLogin($_SESSION['pseudo'],$_POST['oldPass'])['check'];
-                    var_dump($checkOldPass);
                     if($checkOldPass==true){
                         $hashPassword=password_hash($_POST['changePass1'], PASSWORD_DEFAULT);
                         $userManager->updateUserPassword($hashPassword,$_SESSION['author_id']);
+                        $modifPassword=1;
                     }
                 }
             }

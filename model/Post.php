@@ -1,4 +1,6 @@
 <?php
+require_once('model/CommentManager.php');
+
 class Post{
 	private $_id;
     private $_title;
@@ -6,6 +8,7 @@ class Post{
     private $_creationDate;
 
     private $_excerpt;
+    private $_nbComment;
 
     public function __construct(){
         $nbArgs=func_num_args();
@@ -25,6 +28,7 @@ class Post{
 
         if (method_exists($this, $method)){$this->$method($value);}
       }
+        $this->setNbComment();
     }
 
     public function getId(){ return $this->_id; }
@@ -33,6 +37,7 @@ class Post{
     public function getCreationDate(){ return $this->_creationDate;}
 
     public function getExcerpt(){ return $this->_excerpt;}
+    public function getNbComment(){ return $this->_nbComment;}
 
     public function setId($id){$this->_id=(int) $id;}
     public function setTitle($title){
@@ -53,5 +58,11 @@ class Post{
     }
     public function setcreationDate($creationDate){
             $this->_creationDate=$creationDate;
+    }
+
+    public function setNbComment(){
+        $commentManager=new CommentManager();
+        $comments=$commentManager->getComments($this->getId());
+        $this->_nbComment=count($comments);
     }
 }
