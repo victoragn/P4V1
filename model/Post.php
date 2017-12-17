@@ -8,6 +8,7 @@ class Post{
     private $_creationDate;
 
     private $_excerpt;
+    private $_excerpt2;
     private $_nbComment;
 
     public function __construct(){
@@ -37,6 +38,7 @@ class Post{
     public function getCreationDate(){ return $this->_creationDate;}
 
     public function getExcerpt(){ return $this->_excerpt;}
+    public function getExcerpt2(){ return $this->_excerpt2;}
     public function getNbComment(){ return $this->_nbComment;}
 
     public function setId($id){$this->_id=(int) $id;}
@@ -50,10 +52,20 @@ class Post{
     public function setExcerpt($content){
         $this->_excerpt=substr(strip_tags($content),0,50);
     }
+    public function setExcerpt2($content){
+        $resume=substr($content,0,700);
+        $pos=strrpos($resume, " ");
+        if($pos===false){
+            $this->_excerpt2=substr($content,0,700);
+        }else{
+            $this->_excerpt2=substr($content,0,$pos);
+        }
+    }
     public function setContent($content){
         if(is_string($content)){
             $this->_content=$content;
             $this->setExcerpt($this->getContent());
+            $this->setExcerpt2($this->getContent());
         }
     }
     public function setcreationDate($creationDate){

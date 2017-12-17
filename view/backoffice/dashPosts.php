@@ -10,7 +10,8 @@
     <table>
         <thead>
             <th>Titre de l'article</th>
-            <th>Débur de l'article</th>
+            <th>Début de l'article</th>
+            <th>Nombre de commentaires</th>
             <th>Date de création</th>
             <th>Modifier</th>
             <th>Supprimer</th>
@@ -22,6 +23,7 @@
             <tr id= "Post<?= $post->getId(); ?>">
                 <td> <?= $post->getTitle(); ?></td>
                 <td> <?= $post->getExcerpt(); ?></td>
+                <td> <?= $post->getNbComment(); ?></td>
                 <td> <?= $post->getCreationDate(); ?></td>
                 <td><button class="btnModifPost">Modifier</button></td>
                 <td><button class="btnDeletePost">Supprimer</button></td>

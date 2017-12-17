@@ -1,18 +1,13 @@
-<?php $title = 'Mon blog'; ?>
+<?php $title = 'Forteroche Blog'; ?>
 
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
 <p><a href="index.php">Retour à la liste des billets</a></p>
 
-<div class="news">
-    <h3>
-        <?= $post->getTitle(); ?>
-        <em>le <?= $post->getCreationDate(); ?></em>
-    </h3>
+<div class="post">
+    <h2><?= $post->getTitle(); ?></h2>
+    <em>le <?= $post->getCreationDate(); ?></em>
             
-    <p>
-        <?= $post->getContent(); /*nl2br met les retours à la ligne*/ ?>
-    </p>
+    <p><?= $post->getContent(); ?></p>
 </div>
 
 <h2>Commentaires</h2>

@@ -11,8 +11,7 @@
             <th>Numéro d'id</th>
             <th>Pseudo</th>
             <th>Email</th>
-            <th>Modifier Mot de passe</th>
-            <th>Supprimer</th>
+            <th>Modifier</th>
         </thead>
         <tbody>
         <?php

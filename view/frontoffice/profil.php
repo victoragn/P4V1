@@ -1,7 +1,6 @@
 <?php $title = 'Modifier le profil'; ?>
 
 <?php ob_start(); ?>
-<h1>Modifier le profil</h1>
 <p><a href="index.php">Retour à l'accueil</a></p>
 
 <div id="messagesInfos">

@@ -1,7 +1,8 @@
-<?php $title = 'Modifier un article'; ?>
+<?php
+    $title = 'Modifier un article';
+?>
 
 <?php ob_start(); ?>
-<h1>Modifier un article</h1>
 <a href="index.php?action=dashboard">Retour à la gestion des articles</a>
 <a href="index.php">Retour à l'acceuil</a>
 

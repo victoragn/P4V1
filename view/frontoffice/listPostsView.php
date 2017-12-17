@@ -1,24 +1,25 @@
-<?php $title = 'Mon blog'; ?>
+<?php $title = 'Forteroche Blog'; ?>
 
 <?php ob_start(); ?>
-<h1>Mon super blog !</h1>
-<p>Derniers billets du blog :</p>
+<div>
+    <h2>Bienvenue sur le blog de Jean Forteroche</h2>
+    <p>Vous retrouverez ici chaque vendredi le nouveau chapitre de mon nouveau roman. Cela, je l'espere, vous fera bien commencer le week-end. Vous pouvez bien sur laisser des commentaires à la fin de chaque chapitre pour me donner vos impressions.</p>
+</div>
 
 
 <?php
 foreach ($posts as &$post){
 ?>
     <div class="news">
-        <h3>
-            <?= $post->getTitle(); ?>
-            <em>le <?= $post->getCreationDate(); ?></em>
-        </h3>
-        
-        <p>
-            <?= $post->getContent(); ?>
-            <br />
-            <em><a href="index.php?action=post&id=<?= $post->getId(); ?>">Il y a <?= $post->getNbComment(); ?> commentaire(s)</a></em>
-        </p>
+        <a href="index.php?action=post&id=<?= $post->getId(); ?>">
+            <h3>
+                <?= $post->getTitle(); ?>
+                <em>le <?= $post->getCreationDate(); ?></em>
+            </h3>
+
+            <p><?= $post->getExcerpt2(); ?>...</p>
+            <p><button>Lire le chapitre</button> Il y a <?= $post->getNbComment(); ?> commentaire(s).</p>
+        </a>
     </div>
 <?php
 }
