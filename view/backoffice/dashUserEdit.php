@@ -7,19 +7,22 @@
 
 <div id="messagesInfos">
     <?php
+        if (isset($checkPseudo) && $checkPseudo==1){echo "Ce pseudo est déjà utilisé par quelqun d'autre !";}
         if (isset($checkEmail) && $checkEmail==1){echo "Cet email est déjà utilisé par quelqun d'autre !";}
         if (isset($champPassVide) && $champPassVide==1){echo "Si vous souhaitez modifier le mot de passe, les 3 champs doivent être remplis !";}
         if (isset($champPassDiff) && $champPassDiff==1){echo "Les deux champs du nouveau mot de passe sont différents !";}
         if (isset($modifPassword) && $modifPassword==1){echo "Le mot de passe a bien été modifié";}
         if (isset($modifEmail) && $modifEmail==1){echo "L\'email a bien été modifié";}
+        if (isset($modifPseudo) && $modifPseudo==1){echo "Le pseudo a bien été modifié";}
+
     ?>
 </div>
-<h2>Infos de <?= $user->getPseudo(); ?></h2>
+<h2>Infos de <?= $userPseudo; ?></h2>
 <div class="profilForm">
-   <form action="index.php?action=profil" method="post">
+   <form action="index.php?action=dashboard&page=users&userId=<?= $user->getId(); ?>" method="post">
        <div>Changer le pseudo : <br />
             <label for="changePseudo">Pseudo</label>
-            <input id="pseudo_input" type="text" name="changePseudo" value="<?= $user->getPseudo(); ?>" />
+            <input id="pseudo_input" type="text" name="changePseudo" value="<?= $userPseudo; ?>" />
         </div>
 
        <div>Modifier le mot de passe : <br />
@@ -33,7 +36,7 @@
         </div>
         <div>Changer l'email : <br />
             <label for="changeEmail">Email</label>
-            <input id="email_input" type="email" name="changeEmail" value="<?= $user->getEmail(); ?>" />
+            <input id="email_input" type="email" name="changeEmail" value="<?= $userEmail; ?>" />
         </div>
         <div>
             <input type="submit" />

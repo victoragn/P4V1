@@ -117,7 +117,7 @@ function modifProfil(){
         }
         if(isset($_POST['oldPass'])&&isset($_POST['changePass1'])&&isset($_POST['changePass2'])&&(!empty($_POST['oldPass'])||!empty($_POST['changePass1'])||!empty($_POST['changePass2']))){
             if($_POST['changePass1']!=$_POST['changePass2']){
-                $changePassDiff=1;
+                $champPassDiff=1;
             }else{
                 if(empty($_POST['oldPass'])||empty($_POST['changePass1'])||empty($_POST['changePass2'])){
                     $champPassVide=1;
@@ -139,12 +139,44 @@ function modifUser($userId){
     $champPassVide=0;
     $changePassDiff=0;
     $modifEmail=0;
+    $modifPseudo=0;
     $userManager= new UserManager();
     $user=$userManager->getUserById($userId);
 
+    $userPseudo=$user->getPseudo();
+    $userEmail=$user->getEmail();
 
-
-
+    if(isset($_POST['changePass1'])){//si le formulaire a été rempli
+         if(isset($_POST['changePseudo'])&&$_POST['changePseudo']!=$user->getPseudo()){//changer pseudo
+            $checkPseudo=$userManager->checkPseudoAlreadyExist($_POST['changePseudo']);
+            if($checkPseudo==0){
+                $userManager->updateUserPseudo($_POST['changePseudo'],$user->getId());
+                $userPseudo=$_POST['changePseudo'];
+                $modifPseudo=1;
+            }
+        }
+        if(isset($_POST['changeEmail'])&&$_POST['changeEmail']!=$user->getEmail()){//changer email
+            $checkEmail=$userManager->checkEmailAlreadyExist($_POST['changeEmail']);
+            if($checkEmail==0){
+                $userManager->updateUserEmail($_POST['changeEmail'],$user->getId());
+                $userEmail=$_POST['changeEmail'];
+                $modifEmail=1;
+            }
+        }
+        if(isset($_POST['changePass1'])&&isset($_POST['changePass2'])&&(!empty($_POST['changePass1'])||!empty($_POST['changePass2']))){//changement du mdp
+            if($_POST['changePass1']!=$_POST['changePass2']){
+                $changePassDiff=1;
+            }else{
+                if(empty($_POST['changePass1'])||empty($_POST['changePass2'])){
+                    $champPassVide=1;
+                }else{
+                    $hashPassword=password_hash($_POST['changePass1'], PASSWORD_DEFAULT);
+                    $userManager->updateUserPassword($hashPassword,$user->getId());
+                    $modifPassword=1;
+                }
+            }
+        }
+    }
     require('view/backoffice/dashUserEdit.php');
 }
 

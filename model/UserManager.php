@@ -32,20 +32,11 @@ class UserManager extends Manager{
     }
     
     public function checkUserAlreadyExist($pseudo,$email){
-        $db = $this->dbConnect();
-        $req1 = $db->prepare('SELECT COUNT(*) FROM users WHERE pseudo= :pseudo');
-        $req2 = $db->prepare('SELECT COUNT(*) FROM users WHERE email= :email');
-        $req1->execute(array('pseudo' => $pseudo));
-        $req2->execute(array('email' => $email));
-        if($req1==false||$req2==false){
-            throw new Exception('L\'une des requete de checkUserAlreadyExist a echouée !');
-        }else{
-            $result = [
-                intval($req1->fetch()[0]),
-                intval($req2->fetch()[0])
-            ];
-            return $result;
-        }
+        $result = [
+            $this->checkPseudoAlreadyExist($pseudo),
+            $this->checkEmailAlreadyExist($email)
+        ];
+        return $result;
     }
     
     public function checkEmailAlreadyExist($email){
@@ -54,6 +45,18 @@ class UserManager extends Manager{
         $req->execute(array('email' => $email));
         if($req==false){
             throw new Exception('La requete de checkEmailAlreadyExist a echouée !');
+        }else{
+            $result = intval($req->fetch()[0]);
+            return $result;
+        }
+    }
+
+    public function checkPseudoAlreadyExist($pseudo){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(*) FROM users WHERE pseudo= :pseudo');
+        $req->execute(array('pseudo' => $pseudo));
+        if($req==false){
+            throw new Exception('La requete de checkPseudoAlreadyExist a echouée !');
         }else{
             $result = intval($req->fetch()[0]);
             return $result;
@@ -112,6 +115,21 @@ class UserManager extends Manager{
         $req->execute($arrayPost);
         if($req==false){
             throw new Exception('La requete de updateUserPassword a echouée !');
+        }else{
+            return $req;
+        }
+    }
+
+    public function updateUserPseudo($pseudo,$authorId){
+        $db = $this->dbConnect();
+        $arrayPost=[
+            'pseudo' => $pseudo,
+            'authorId' => $authorId
+        ];
+        $req = $db->prepare('UPDATE users SET pseudo= :pseudo WHERE author_id = :authorId');
+        $req->execute($arrayPost);
+        if($req==false){
+            throw new Exception('La requete de updateUserEmail a echouée !');
         }else{
             return $req;
         }
