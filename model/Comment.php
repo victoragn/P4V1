@@ -53,4 +53,16 @@ class Comment{
         $user=$userManager->getUserById($this->getAuthorId());
         return $user;
     }
+
+    public function getNbSignal(){
+        $commentManager=new CommentManager();
+        $nbSignal=$commentManager->getNbSignalByCommentId($this->getId());
+        return nbSignal;
+    }
+
+    public function checkSignalByUserId($userId){
+        $commentManager=new CommentManager();
+        $checkSignal=$commentManager->checkSignal($this->getId(),$userId);
+        return nbSignal;
+    }
 }

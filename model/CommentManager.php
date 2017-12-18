@@ -111,4 +111,50 @@ class CommentManager extends Manager{
             return $req;
         }
     }
+
+    public function getNbSignalByCommentId($commentId){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(*) FROM signals WHERE comment_id= :commentId');
+        $req->execute(array('commentId' => $commentId));
+        if($req==false){
+            throw new Exception('La requete de getNbSignal a echouée !');
+        }else{
+            $result=intval($req->fetch()[0]);
+            return $result;
+        }
+    }
+
+    public function checkSignal($commentId,$userId){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT COUNT(*) FROM signals WHERE comment_id= :commentId AND author_id= :userId');
+        $req->execute(array('commentId' => $commentId,'userId'=> $userId));
+        if($req==false){
+            throw new Exception('La requete de checkSignal a echouée !');
+        }else{
+            $result=intval($req->fetch()[0]);
+            return $result;
+        }
+    }
+
+    public function addSignal($commentId,$userId){
+        $db = $this->dbConnect();
+        $req = $db->prepare('INSERT INTO signals(comment_id, author_id) VALUES(?, ?,)');
+        $req->execute(array('commentId' => $commentId,'userId'=> $userId));
+        if($req==false){
+            throw new Exception('La requete de addSignal a echouée !');
+        }else{
+            return $req;
+        }
+    }
+
+    public function deleteSignal($commentId,$userId){
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM signals WHERE comment_id= :commentId AND author_id= :userId');
+        $req->execute(array('commentId' => $commentId,'userId'=> $userId));
+        if($req==false){
+            throw new Exception('La requete de addSignal a echouée !');
+        }else{
+            return $req;
+        }
+    }
 }

@@ -9,13 +9,13 @@ function listPosts(){
     return $posts;
 }
 
-function post(){
+function post($postId){
     $postManager = new PostManager();
     $commentManager = new CommentManager();
     $userManager = new UserManager();
 
-    $post = $postManager->getPost(htmlspecialchars($_GET['id']));
-    $comments = $commentManager->getComments(htmlspecialchars($_GET['id']));
+    $post = $postManager->getPost(htmlspecialchars($postId));
+    $comments = $commentManager->getComments(htmlspecialchars($postId));
 
     require('view/frontoffice/postView.php');
 }
@@ -215,5 +215,26 @@ function deletePost($postId){
         $commentManager->removeComment($comment->getId());
     }
     $result=$postManager->removePost($postId);
+}
+
+function toggleSignal($onOff,$commentId){
+    $commentId=(int)htmlspecialchars($commentId);
+    $commentManager=new CommentManager();
+    $checkSignal=$commentManager->checkSignal($commentId,$_SESSION['author_id']);
+    if(htmlspecialchars($onOff)!="on"){
+        if ($checkSignal==1){
+            throw new Exception('Le commentaire est déjà signalé !');
+        }else{
+            $commentManager->addSignal($commentId,$_SESSION['author_id']);
+        }
+    }elseif(htmlspecialchars($onOff)!="off"){
+        if ($checkSignal==0){
+            throw new Exception('Le signalement n\'existe pas et ne peux donc pas être retiré!');
+        }else{
+            $commentManager->deleteSignal($commentId,$_SESSION['author_id']);
+        }
+    }else{
+        throw new Exception('La valeur de signal est fausse !');
+    }
 }
 

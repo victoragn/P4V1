@@ -31,6 +31,17 @@ foreach ($comments as &$comment){
 <div id="<?= 'divComment'. $comment->getId(); ?>" class='divComment'>
     <p><strong><?= $comment->getUser()->getPseudo(); ?></strong> le <?= $comment->getCommentDate();
         if(isset($_SESSION['author_id'])){
+
+            if ( $comment->checkSignalByUserId($_SESSION['author_id'])==1 ){?>
+                <a href="index.php?action=post&id=<?= $post->getId(); ?>&signal=off$commentId=<?= $comment->getId(); ?>">
+                    <button class="btnSignalOn">Dé-signaler</button>
+                </a>
+            <?php }else{?>
+                <a href="index.php?action=post&id=<?= $post->getId(); ?>&signal=on$commentId=<?= $comment->getId(); ?>">
+                    <button class="btnSignalOff">Signaler</button>
+                </a>
+            <?php }
+
             if($comment->getAuthorId()==$_SESSION['author_id']||$_SESSION['role']==1){
                 ?><button class="btnModifComment" >Modifier</button><button class="btnDeleteComment" >Supprimer</button> <?php
             }
