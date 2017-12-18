@@ -189,10 +189,8 @@ function supprComment($commentId){
         if ($comment->getAuthorId()!=$_SESSION['author_id']&&$_SESSION['role']!=1){
             throw new Exception('Vous n\'avez pas le droit de supprimer ce commentaire');
         }else{
-            $result=$commentManager->removeComment($comment->getId());
-            if($result===false){
-                throw new Exception('La suppression du commentaire à échoué !');
-            }
+            $commentManager->deleteAllSignalsFromComment($comment->getId());
+            $commentManager->removeComment($comment->getId());
         }
     }
 }
@@ -221,13 +219,13 @@ function toggleSignal($onOff,$commentId){
     $commentId=(int)htmlspecialchars($commentId);
     $commentManager=new CommentManager();
     $checkSignal=$commentManager->checkSignal($commentId,$_SESSION['author_id']);
-    if(htmlspecialchars($onOff)!="on"){
+    if(htmlspecialchars($onOff)=="on"){
         if ($checkSignal==1){
             throw new Exception('Le commentaire est déjà signalé !');
         }else{
             $commentManager->addSignal($commentId,$_SESSION['author_id']);
         }
-    }elseif(htmlspecialchars($onOff)!="off"){
+    }elseif(htmlspecialchars($onOff)=="off"){
         if ($checkSignal==0){
             throw new Exception('Le signalement n\'existe pas et ne peux donc pas être retiré!');
         }else{

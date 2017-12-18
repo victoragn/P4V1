@@ -11,3 +11,11 @@ body{
     max-width: 1200px;
     margin: 0 auto;
 }
+
+.btnSignalOn{
+    background-color: blue;
+}
+
+.btnSignalOff{
+    background-color: red;
+}

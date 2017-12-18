@@ -138,8 +138,8 @@ class CommentManager extends Manager{
 
     public function addSignal($commentId,$userId){
         $db = $this->dbConnect();
-        $req = $db->prepare('INSERT INTO signals(comment_id, author_id) VALUES(?, ?,)');
-        $req->execute(array('commentId' => $commentId,'userId'=> $userId));
+        $req = $db->prepare('INSERT INTO signals(comment_id, author_id) VALUES(?, ?)');
+        $req->execute(array($commentId,$userId));
         if($req==false){
             throw new Exception('La requete de addSignal a echouée !');
         }else{
@@ -152,7 +152,18 @@ class CommentManager extends Manager{
         $req = $db->prepare('DELETE FROM signals WHERE comment_id= :commentId AND author_id= :userId');
         $req->execute(array('commentId' => $commentId,'userId'=> $userId));
         if($req==false){
-            throw new Exception('La requete de addSignal a echouée !');
+            throw new Exception('La requete de deleteSignal a echouée !');
+        }else{
+            return $req;
+        }
+    }
+
+    public function deleteAllSignalsFromComment($commentId){
+        $db = $this->dbConnect();
+        $req = $db->prepare('DELETE FROM signals WHERE comment_id= :commentId');
+        $req->execute(array('commentId' => $commentId));
+        if($req==false){
+            throw new Exception('La requete de deleteAllSignalsFromComment a echouée !');
         }else{
             return $req;
         }

@@ -63,6 +63,6 @@ class Comment{
     public function checkSignalByUserId($userId){
         $commentManager=new CommentManager();
         $checkSignal=$commentManager->checkSignal($this->getId(),$userId);
-        return nbSignal;
+        return $checkSignal;
     }
 }

@@ -27,7 +27,7 @@ try {
                     header('Location:'.$_SERVER['PHP_SELF'].'?action=post&id='.htmlspecialchars($_GET['id']));
                     die;
                 }else{
-                    if(isset($_GET['signal'])&&isset($_GET['commentId'])){
+                    if(isset($_GET['signal']) && isset($_GET['commentId'])){
                         toggleSignal($_GET['signal'],$_GET['commentId']);
                     }
                     post($_GET['id']);
