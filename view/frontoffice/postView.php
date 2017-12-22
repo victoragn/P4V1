@@ -10,8 +10,8 @@
             
     <p><?= $post->getContent(); ?></p>
 </div>
-
-<h2 id="titreComm">Commentaires</h2>
+<div id="comments">
+    <h2 id="titreComm">Commentaires</h2>
 <?php
 if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie?>
 
@@ -25,7 +25,6 @@ if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est d
     </div>
 </form>
 <?php } ?>
-
 <?php
 foreach ($comments as &$comment){
 ?>
@@ -56,6 +55,7 @@ foreach ($comments as &$comment){
 <?php
 }
 ?>
+</div>
 <?php $content = ob_get_clean(); ?>
 
 <?php require('templateIndex.php'); ?>

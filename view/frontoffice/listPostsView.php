@@ -2,7 +2,7 @@
 <?php $title2= 'Le Blog'; ?>
 
 <?php ob_start(); ?>
-<div>
+<div id="pPresentation">
     <h2>Bienvenue sur le blog de Jean Forteroche</h2>
     <p>Vous retrouverez ici chaque vendredi le nouveau chapitre de mon nouveau roman. Cela, je l'espere, vous fera bien commencer le week-end. Vous pouvez bien sur laisser des commentaires à la fin de chaque chapitre pour me donner vos impressions.</p>
 </div>

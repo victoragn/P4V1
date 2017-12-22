@@ -11,6 +11,7 @@
 /* //////////////// GENERAL ////////////////////////*/
 body{
     max-width: 1200px;
+    padding: 0 40px;
     margin: 0 auto;
     font-family: 'ahellya', sans-serif;
     position: relative;
@@ -26,17 +27,21 @@ body{
 }
 
 footer{
-    position: absolute;
     width: 100%;
     bottom: 0;
     border-top: 1px solid grey;
-    padding-top: 15px;
     text-align: center;
+}
+#comments{
 }
 /*/////////////////// FRONTOFFICE ///////////////////*/
 .post{
     text-align: justify;
     text-justify: inter-word;
+}
+
+#pPresentation{
+    text-align: center;
 }
 
 /*HEADER*/
