@@ -1,3 +1,20 @@
+@font-face {
+    font-family: "ahellya";
+    src: url("../fonts/ahellya_italic.ttf");
+    font-weight: italic;
+}
+@font-face {
+     font-family: "ahellya";
+     src: url("../fonts/ahellya.ttf");
+}
+
+/* //////////////// GENERAL ////////////////////////*/
+body{
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: 'ahellya', sans-serif;
+}
+
 .fondBlanc{
     background-color: white;
 }
@@ -5,16 +22,58 @@
 .fondRouge{
     background-color: red;
 }
-
-/* //////////////// GENERAL ////////////////////////*/
-body{
-    max-width: 1200px;
-    margin: 0 auto;
+/*/////////////////// FRONTOFFICE ///////////////////*/
+.post{
+    text-align: justify;
+    text-justify: inter-word;
 }
 
+/*HEADER*/
+header{
+    border-bottom: 1px solid grey;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+header h1{
+    text-align: center;
+}
+#titrePrincipal1{
+    font-size: 1.2em;
+}
+#titrePrincipal2{
+    font-size: 0.7em;
+    color: grey;
+}
+#userHeader,#logHeader{
+    position: absolute;
+    right: 0;
+}
+
+/*listpostsview*/
+.news a{
+    text-decoration: none;
+    color: black;
+}
+.news button{
+    cursor:  pointer;
+}
+
+/*postview*/
+#titreComm{
+    border-top: 1px solid grey;
+    padding-top: 5px;
+}
 .btnSignalOn{
 }
 
 .btnSignalOff{
     background-color: red;
 }
+
+/*/////////////////// DASHBOARD ///////////////////*/
+
+
+
+/*/////////////////// REGISTER ///////////////////*/

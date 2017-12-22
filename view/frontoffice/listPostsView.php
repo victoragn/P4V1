@@ -1,4 +1,5 @@
-<?php $title = 'Forteroche Blog'; ?>
+<?php $title = 'Jean Forteroche'; ?>
+<?php $title2= 'Le Blog'; ?>
 
 <?php ob_start(); ?>
 <div>

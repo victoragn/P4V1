@@ -1,4 +1,5 @@
-<?php $title = 'Forteroche Blog'; ?>
+<?php $title = 'Jean Forteroche'; ?>
+<?php $title2= 'Le Blog'; ?>
 
 <?php ob_start(); ?>
 <p><a href="index.php">Retour à la liste des billets</a></p>
@@ -10,7 +11,7 @@
     <p><?= $post->getContent(); ?></p>
 </div>
 
-<h2>Commentaires</h2>
+<h2 id="titreComm">Commentaires</h2>
 <?php
 if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie?>
 
@@ -29,7 +30,7 @@ if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est d
 foreach ($comments as &$comment){
 ?>
 <div id="<?= 'divComment'. $comment->getId(); ?>" class='divComment'>
-    <p><strong><?= $comment->getUser()->getPseudo(); ?></strong> le <?= $comment->getCommentDate();
+    <p><strong><?= ucfirst($comment->getUser()->getPseudo()); ?></strong> le <?= $comment->getCommentDate();
         if(isset($_SESSION['author_id'])){
             if($_SESSION['author_id']!=$comment->getAuthorId()){
                 if ( $comment->checkSignalByUserId($_SESSION['author_id'])==1 ){?>

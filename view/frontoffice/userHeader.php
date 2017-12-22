@@ -1,5 +1,5 @@
 <div id="userHeader">
-    <span id="pseudoHeader"><?= $_SESSION['pseudo']; ?></span>
+    <span id="pseudoHeader"><?= ucfirst($_SESSION['pseudo']); ?></span>
     <?php if($_SESSION['role']==1){ ?>
     <a href="index.php?action=dashboard">Gérer le site</a>
     <?php

@@ -9,6 +9,10 @@
 
     <body>
         <header>
+            <h1>
+                <span id="titrePrincipal1"><?= $title ?></span><br/>
+                <span id="titrePrincipal2"><?= $title2 ?></span>
+            </h1>
         <?php
             if (isset($_SESSION['author_id'])){
                 require('view/frontoffice/userHeader.php');
@@ -16,10 +20,10 @@
                 require('view/frontoffice/logHeader.php');
             }
         ?>
-            <h1><?= $title ?></h1>
         </header>
         <?= $content ?>
         <footer>
+            <p>© 2017 Victor AGNEZ</p>
         </footer>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
