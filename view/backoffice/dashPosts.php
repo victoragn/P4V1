@@ -4,8 +4,32 @@
 <h1>Gestion des articles</h1>
 <a href="index.php?action=dashboard&page=users"><button class="backBtn">Gerer les membres</button></a>
 <a href="index.php"><button class="backBtn">Retour à l'acceuil</button></a>
+<div id="signLists">
+    <h2>Commentaires fortement signalés !</h2>
+    <table>
+        <thead>
+            <th>Numero d'id</th>
+            <th>Auteur</th>
+            <th>Nb de signalements</th>
+            <th>Commentaire</th>
+            <th>Modifier</th>
+        </thead>
+        <tbody>
+            <?php foreach ($signComments as &$signComment){ ?>
+            <tr id= "signComment<?= $signComment->getId(); ?>">
+                <td><?= $signComment->getId(); ?></td>
+                <td><?= $signComment->getAuthorId(); ?></td>
+                <td><?= $signComment->getNbSignal(); ?></td>
+                <td><?= $signComment->getComment(); ?></td>
+                <td><button class="btnSupprSignComment backBtn">Supprimer</button></td>
+            </tr>
+        </tbody>
+    </table>
+<?php } ?>
+</div>
 
-<div>
+<div id="postsList">
+    <h2>Liste des articles</h2>
     <table>
         <thead>
             <th>Titre de l'article</th>

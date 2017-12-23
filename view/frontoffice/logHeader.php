@@ -12,10 +12,10 @@
         </div>
         <div id="ligneConnexionRegister">
             <div>
-                <input type="submit" value="Connexion"/>
+                <a href="register.php">S'inscrire</a>
             </div>
             <div>
-                <a href="register.php">S'inscrire</a>
+                <input class="frontBtn" type="submit" value="Connexion"/>
             </div>
         </div>
     </form>
