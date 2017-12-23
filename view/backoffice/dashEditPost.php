@@ -9,7 +9,7 @@
 <form method="post" action="index.php?action=dashboard&editPost=<?= $post->getId(); ?>">
     <label id="titlePostLabel" for="titlePost">Titre de l'article :<input id="titlePostInput" type="text" name="titlePost" value="<?= $post->getTitle(); ?>"></label>
     <textarea id="mytextarea" name="editedPost"><?= $post->getContent(); ?></textarea>
-    <input type="submit" value="Publier">
+    <input class="backBtn" type="submit" value="Publier">
 </form>
 
 <?php $content = ob_get_clean(); ?>

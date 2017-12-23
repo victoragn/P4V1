@@ -13,9 +13,9 @@
 
 
 <form method="post" action="index.php?action=dashboard">
-    <label id="titlePostLabel" for="titlePost">Titre de l'article :<input type="text" name="titlePost" value="<?php if(isset($postTitle)){echo $postTitle;} ?>"></label>
+    <label id="titlePostLabel" for="titlePost">Titre de l'article :<input id="titlePostInput" type="text" name="titlePost" value="<?php if(isset($postTitle)){echo $postTitle;} ?>"></label>
     <textarea id="mytextarea" name="newPost"><?php if(isset($postContent)){echo $postContent;} ?></textarea>
-    <input type="submit" value="Publier">
+    <input class="backBtn" type="submit" value="Publier">
 </form>
 
 <?php $content = ob_get_clean(); ?>

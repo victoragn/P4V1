@@ -24,6 +24,13 @@ body{
     display: flex;
     flex-direction: column;
 }
+h1{
+    padding: 30px 0;
+}
+
+.aBtn{
+    text-decoration: none;
+}
 
 #content{
     flex-grow: 1;
@@ -44,8 +51,7 @@ footer{
     border-top: 1px solid grey;
     text-align: center;
 }
-#comments{
-}
+
 /*/////////////////// FRONTOFFICE ///////////////////*/
 .post{
     text-align: justify;
@@ -86,6 +92,7 @@ footer{
 
 .frontBtn{
     margin : 2px;
+    padding: 4px;
 }
 
 /*HEADER*/
@@ -139,16 +146,18 @@ header h1{
     padding-top: 5px;
 }
 .btnSignalOn{
+    background-color: red;
 }
 
 .btnSignalOff{
-    background-color: red;
+
 }
 
 /*/////////////////// DASHBOARD ///////////////////*/
 
 .backBtn{
     margin : 2px;
+    padding: 4px;
 }
 
 #titlePostLabel{

@@ -2,8 +2,8 @@
 
 <?php ob_start(); ?>
 <h1>Gestion des membres</h1>
-<a href="index.php?action=dashboard">Gerer les articles</a>
-<a href="index.php">Retour à l'acceuil</a>
+<a href="index.php?action=dashboard"><button class="backBtn">Gerer les articles</button></a>
+<a href="index.php"><button class="backBtn">Retour à l'acceuil</button></a>
 
 <div>
     <table>

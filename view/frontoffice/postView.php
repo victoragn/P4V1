@@ -33,18 +33,18 @@ foreach ($comments as &$comment){
         if(isset($_SESSION['author_id'])){
             if($_SESSION['author_id']!=$comment->getAuthorId()){
                 if ( $comment->checkSignalByUserId($_SESSION['author_id'])==1 ){?>
-                    <a href="index.php?action=post&id=<?= $post->getId(); ?>&signal=off&commentId=<?= $comment->getId(); ?>">
-                        <button class="btnSignalOn">Dé-signaler</button>
+                    <a class="aBtn" href="index.php?action=post&id=<?= $post->getId(); ?>&signal=off&commentId=<?= $comment->getId(); ?>">
+                        <button class="btnSignalOn frontBtn">Dé-signaler</button>
                     </a>
                 <?php }else{?>
-                    <a href="index.php?action=post&id=<?= $post->getId(); ?>&signal=on&commentId=<?= $comment->getId(); ?>">
-                        <button class="btnSignalOff">Signaler</button>
+                    <a class="aBtn" href="index.php?action=post&id=<?= $post->getId(); ?>&signal=on&commentId=<?= $comment->getId(); ?>">
+                        <button class="btnSignalOff frontBtn">Signaler</button>
                     </a>
                 <?php }
             }
 
             if($comment->getAuthorId()==$_SESSION['author_id']||$_SESSION['role']==1){
-                ?><button class="btnModifComment" >Modifier</button><button class="btnDeleteComment" >Supprimer</button> <?php
+                ?><button class="btnModifComment frontBtn" >Modifier</button><button class="btnDeleteComment frontBtn" >Supprimer</button> <?php
             }
         }
         ?>

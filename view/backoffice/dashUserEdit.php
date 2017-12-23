@@ -2,8 +2,8 @@
 
 <?php ob_start(); ?>
 <h1>Modifier un membre</h1>
-<a href="index.php?action=dashboard&page=users">Gerer les membres</a>
-<a href="index.php">Retour à l'acceuil</a>
+<a href="index.php?action=dashboard&page=users"><button class="backBtn">Gerer les membres</button></a>
+<a href="index.php"><button class="backBtn">Retour à l'acceuil</button></a>
 
 <div id="messagesInfos">
     <?php
