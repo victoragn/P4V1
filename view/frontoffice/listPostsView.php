@@ -19,7 +19,7 @@ foreach ($posts as &$post){
             </h3>
 
             <p><?= $post->getExcerpt2(); ?>...</p>
-            <p class="ligneVoirPlus"><button>Lire le chapitre</button> Il y a <?= $post->getNbComment(); ?> commentaire(s).</p>
+            <p class="ligneVoirPlus"><button class="frontBtn">Lire le chapitre</button> Il y a <?= $post->getNbComment(); ?> commentaire(s).</p>
         </a>
     </div>
 <?php

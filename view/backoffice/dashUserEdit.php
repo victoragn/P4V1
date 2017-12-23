@@ -20,12 +20,12 @@
 <h2>Infos de <?= $userPseudo; ?></h2>
 <div class="profilForm">
    <form action="index.php?action=dashboard&page=users&userId=<?= $user->getId(); ?>" method="post">
-       <div>Changer le pseudo : <br />
+       <div><span class="titreForm">Changer le pseudo : </span>
             <label for="changePseudo">Pseudo</label>
             <input id="pseudo_input" type="text" name="changePseudo" value="<?= $userPseudo; ?>" />
         </div>
 
-       <div>Modifier le mot de passe : <br />
+       <div><span class="titreForm">Modifier le mot de passe : </span>
             <label for="changePass1">Mot de passe</label>
             <input id="changePassInput1" type="password" name="changePass1"/>
             <br />
@@ -34,12 +34,12 @@
             <input id="changePassInput2" type="password" name="changePass2"/>
             <br />
         </div>
-        <div>Changer l'email : <br />
+       <div><span class="titreForm">Changer l'email : </span>
             <label for="changeEmail">Email</label>
             <input id="email_input" type="email" name="changeEmail" value="<?= $userEmail; ?>" />
         </div>
         <div>
-            <input type="submit" />
+            <input id="formSubmit" type="submit" />
         </div>
     </form>
 </div>

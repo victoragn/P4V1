@@ -6,7 +6,7 @@
 
 <div class="post">
     <h2><?= $post->getTitle(); ?></h2>
-    <em>le <?= $post->getCreationDate(); ?></em>
+    <em class="datePost">le <?= $post->getCreationDate(); ?></em>
             
     <p><?= $post->getContent(); ?></p>
 </div>
@@ -21,7 +21,7 @@ if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est d
         <textarea id="commentInput" name="comment"></textarea>
     </div>
     <div>
-        <input type="submit" />
+        <input class="frontBtn" type="submit" />
     </div>
 </form>
 <?php } ?>

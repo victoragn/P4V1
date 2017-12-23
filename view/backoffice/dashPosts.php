@@ -6,7 +6,6 @@
 <a href="index.php"><button class="backBtn">Retour à l'acceuil</button></a>
 
 <div>
-    <a href="index.php?action=dashboard&page=newPost"><button>Créer un nouvel article</button></a>
     <table>
         <thead>
             <th>Titre de l'article</th>
@@ -25,14 +24,15 @@
                 <td> <?= $post->getExcerpt(); ?></td>
                 <td> <?= $post->getNbComment(); ?></td>
                 <td> <?= $post->getCreationDate(); ?></td>
-                <td><button class="btnModifPost">Modifier</button></td>
-                <td><button class="btnDeletePost">Supprimer</button></td>
+                <td><button class="btnModifPost backBtn">Modifier</button></td>
+                <td><button class="btnDeletePost backBtn">Supprimer</button></td>
             </tr>
         <?php
         }
         ?>
         </tbody>
     </table>
+    <a href="index.php?action=dashboard&page=newPost"><button class="backBtn">Créer un nouvel article</button></a>
 </div>
 
 <?php $content = ob_get_clean(); ?>
