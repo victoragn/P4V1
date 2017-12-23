@@ -118,6 +118,7 @@ try {
                         }
                     }else{
                         $posts=listPosts();
+                        $signComments=getSignComments();
                         require('view/backoffice/dashPosts.php');
                     }
                 }

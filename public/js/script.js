@@ -45,17 +45,23 @@ $('.btnModifPost').each(function() {
     $(this).click( function() {
         var lignePost=$(this).parents('tr');
         var idPost=lignePost.attr('id').substr(4);
-        console.log(idPost);
         document.location.href='index.php?action=dashboard&page=modifPost&postId='+idPost;
     });
 });
 
 $('.btnSupprComment').each(function() {
     $(this).click( function() {
-        var lignePost=$(this).parents('tr');
-        var idPost=lignePost.attr('id').substr(4);
-        console.log(idPost);
-        document.location.href='index.php?action=dashboard&page=modifPost&postId='+idPost;
+        var ligneComment=$(this).parents('tr');
+        var idComment=ligneComment.attr('id').substr(11);
+        $('<div>Etes-vous sur de vouloir supprimer ce commentaire ? <button class="yesDelete">Oui</button><button class="noDelete">Non</button></div>').insertAfter(this);/*ajoute le commentaire en question dans une textarea avec un bouton pour envoyer la modif*/
+        $('.yesDelete').click(function(){
+            document.location.href=$(location).attr('href')+'&deleteComment='+idComment;
+        });
+        $('.noDelete').click(function(){
+            document.location.href=$(location).attr('href');
+        });
+        $('.btnSupprComment').remove();
+        document.location.href='index.php?action=dashboard';
     });
 });
 

@@ -9,6 +9,11 @@ function listPosts(){
     return $posts;
 }
 
+function getSignComments(){
+
+    return $signComments;
+}
+
 function post($postId){
     $postManager = new PostManager();
     $commentManager = new CommentManager();
