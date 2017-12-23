@@ -21,7 +21,7 @@
             }
         ?>
         </header>
-        <?= $content ?>
+        <div id="content"><?= $content ?></div>
         <footer>
             <p>© 2017 Victor AGNEZ</p>
         </footer>

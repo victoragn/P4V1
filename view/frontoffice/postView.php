@@ -2,7 +2,7 @@
 <?php $title2= 'Le Blog'; ?>
 
 <?php ob_start(); ?>
-<p><a href="index.php">Retour à la liste des billets</a></p>
+<p><a href="index.php"><button class="frontBtn">Retour à la liste des billets</button></a></p>
 
 <div class="post">
     <h2><?= $post->getTitle(); ?></h2>
@@ -15,10 +15,10 @@
 <?php
 if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie?>
 
-<form action="index.php?action=addComment&amp;id=<?= $post->getId(); ?>" method="post">
+<form id="commentForm" action="index.php?action=addComment&amp;id=<?= $post->getId(); ?>" method="post">
     <div>
         <label for="comment">Ajoutez votre commentaire</label><br />
-        <textarea id="comment" name="comment"></textarea>
+        <textarea id="commentInput" name="comment"></textarea>
     </div>
     <div>
         <input type="submit" />
