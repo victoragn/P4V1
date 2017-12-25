@@ -23,9 +23,9 @@
                 <td><?= $signComment->getComment(); ?></td>
                 <td><button class="btnSupprSignComment backBtn">Supprimer</button></td>
             </tr>
+            <?php } ?>
         </tbody>
     </table>
-<?php } ?>
 </div>
 
 <div id="postsList">

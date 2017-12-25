@@ -124,6 +124,22 @@ class CommentManager extends Manager{
         }
     }
 
+    public function getCommentsByNbSign($nbSign){
+        $db = $this->dbConnect();
+        $req = $db->prepare('SELECT comment_id FROM signals GROUP BY comment_id HAVING COUNT(comment_id)>0');
+        $req->execute(array('nbSignal' => $nbSign));
+        if($req==false){
+            throw new Exception('La requete de getCommentsByNbSign a echouée !');
+        }else{
+            $result=array();
+            while ($data = $req->fetch()){
+                $comment=$this->getComment($data[0]);
+                $result[]=$comment;
+            }
+            return $result;
+        }
+    }
+
     public function checkSignal($commentId,$userId){
         $db = $this->dbConnect();
         $req = $db->prepare('SELECT COUNT(*) FROM signals WHERE comment_id= :commentId AND author_id= :userId');

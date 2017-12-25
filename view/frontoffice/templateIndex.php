@@ -11,7 +11,7 @@
         <header>
             <h1>
                 <span id="titrePrincipal1"><?= $title ?></span><br/>
-                <span id="titrePrincipal2"><?= $title2 ?></span>
+                <span id="titrePrincipal2"><?php if(isset($title2)){echo $title2;} ?></span>
             </h1>
         <?php
             if (isset($_SESSION['author_id'])){

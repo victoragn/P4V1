@@ -57,7 +57,7 @@ class Comment{
     public function getNbSignal(){
         $commentManager=new CommentManager();
         $nbSignal=$commentManager->getNbSignalByCommentId($this->getId());
-        return nbSignal;
+        return $nbSignal;
     }
 
     public function checkSignalByUserId($userId){
