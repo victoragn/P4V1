@@ -11,7 +11,7 @@ function listPosts(){
 
 function getSignComments(){
     $commentManager=new CommentManager();
-    $signComments=$commentManager->getCommentsByNbSign(1);
+    $signComments=$commentManager->getCommentsByNbSign(2);
     return $signComments;
 }
 

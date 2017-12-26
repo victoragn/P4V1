@@ -11,16 +11,16 @@
             <th>Numero d'id</th>
             <th>Auteur</th>
             <th>Nb de signalements</th>
-            <th>Commentaire</th>
-            <th>Modifier</th>
+            <th>Extrait du commentaire</th>
+            <th>Supprimer</th>
         </thead>
         <tbody>
             <?php foreach ($signComments as &$signComment){ ?>
             <tr id= "signComment<?= $signComment->getId(); ?>">
                 <td><?= $signComment->getId(); ?></td>
-                <td><?= $signComment->getAuthorId(); ?></td>
+                <td><?= ucfirst($signComment->getUser()->getPseudo()); ?></td>
                 <td><?= $signComment->getNbSignal(); ?></td>
-                <td><?= $signComment->getComment(); ?></td>
+                <td><?= $signComment->getExcerpt(); ?></td>
                 <td><button class="btnSupprSignComment backBtn">Supprimer</button></td>
             </tr>
             <?php } ?>

@@ -89,7 +89,10 @@ try {
             if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
                 throw new Exception('Vous n\'avez pas le droit d\'ouvrir le dashboard');
             }else{
-                if (isset($_GET['page']) && $_GET['page']=='users') { //gerer les membres
+                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] >=0){
+                    supprComment(htmlspecialchars($_GET['deleteComment']));
+                    header('Location: index.php?action=dashboard');
+                }elseif (isset($_GET['page']) && $_GET['page']=='users') { //gerer les membres
                     if(isset($_GET['userId']) && $_GET['userId']>=0){
                         modifUser(htmlspecialchars($_GET['userId']));
                     }else{

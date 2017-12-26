@@ -9,6 +9,8 @@ class Comment{
     private $_comment;
     private $_commentDate;
 
+    private $_excerpt;
+
     public function __construct(){
         $nbArgs=func_num_args();
         $args=func_get_args()[0];
@@ -35,13 +37,18 @@ class Comment{
     public function getAuthorId(){ return $this->_authorId;}
     public function getComment(){ return $this->_comment;}
     public function getCommentDate(){ return $this->_commentDate;}
+    public function getExcerpt(){ return $this->_excerpt;}
 
     public function setId($id){$this->_id=(int) $id;}
     public function setPostId($postId){$this->_postId=(int) $postId;}
     public function setAuthorId($authorId){$this->_authorId=(int) $authorId;}
+    public function setExcerpt($content){
+        $this->_excerpt=substr(strip_tags($content),0,100);
+    }
     public function setComment($comment){
         if(is_string($comment)){
             $this->_comment=nl2br(htmlspecialchars($comment));
+            $this->setExcerpt(nl2br(htmlspecialchars($comment)));
         }
     }
     public function setcommentDate($commentDate){

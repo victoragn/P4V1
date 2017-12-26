@@ -13,7 +13,7 @@ $('.btnModifComment').each(function() {/*créer un bouton "modifier" à coté de
 $('.btnDeleteComment').each(function() {/*créer un bouton "modifier" à coté de chaque commentaire de l'utilisateur connecté*/
     $(this).click( function() {
         var idComment=$(this).parents('.divComment').attr('id').substr(10);/*récupère l'id de la div du commentaire pour récuperer l'id du commentaire en question*/
-        $('<div>Etes-vous sur de vouloir supprimer ce commentaire ? <button class="yesDelete">Oui</button><button class="noDelete">Non</button></div>').insertAfter(this);/*ajoute le commentaire en question dans une textarea avec un bouton pour envoyer la modif*/
+        $('<div>Etes-vous sur de vouloir supprimer ce commentaire ? <button class="frontBtn yesDelete">Oui</button><button class="frontBtn noDelete">Non</button></div>').insertAfter(this);/*ajoute le commentaire en question dans une textarea avec un bouton pour envoyer la modif*/
         $('.yesDelete').click(function(){
             document.location.href=$(location).attr('href')+'&deleteComment='+idComment;
         });
@@ -29,7 +29,7 @@ $('.btnDeletePost').each(function() {
     $(this).click( function() {
         var lignePost=$(this).parents('tr');
         var idPost=lignePost.attr('id').substr(4);
-        $('<tr><td colspan="4">Etes-vous sur de vouloir supprimer cet article ? (Cela supprimera aussi tous les commentaires associés)<button class="yesDelete">Oui</button><button class="noDelete">Non</button></td></tr>').insertAfter(lignePost);
+        $('<tr><td colspan="4">Etes-vous sur de vouloir supprimer cet article ? (Cela supprimera aussi tous les commentaires associés)<button class="frontBtn yesDelete">Oui</button><button class="frontBtn noDelete">Non</button></td></tr>').insertAfter(lignePost);
         $('.yesDelete').click(function(){
             document.location.href='index.php?action=deletePost&postId='+idPost;
         });
@@ -49,19 +49,19 @@ $('.btnModifPost').each(function() {
     });
 });
 
-$('.btnSupprComment').each(function() {
+$('.btnSupprSignComment').each(function() {
     $(this).click( function() {
         var ligneComment=$(this).parents('tr');
         var idComment=ligneComment.attr('id').substr(11);
-        $('<div>Etes-vous sur de vouloir supprimer ce commentaire ? <button class="yesDelete">Oui</button><button class="noDelete">Non</button></div>').insertAfter(this);/*ajoute le commentaire en question dans une textarea avec un bouton pour envoyer la modif*/
+        $('<div>Etes-vous sur de vouloir supprimer ce commentaire ? <button class="frontBtn yesDelete">Oui</button><button class="frontBtn noDelete">Non</button></div>').insertAfter(this);/*ajoute le commentaire en question dans une textarea avec un bouton pour envoyer la modif*/
         $('.yesDelete').click(function(){
             document.location.href=$(location).attr('href')+'&deleteComment='+idComment;
         });
         $('.noDelete').click(function(){
             document.location.href=$(location).attr('href');
         });
-        $('.btnSupprComment').remove();
-        document.location.href='index.php?action=dashboard';
+        $('.btnSupprSignComment').remove();
     });
 });
+
 

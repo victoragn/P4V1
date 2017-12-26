@@ -126,7 +126,7 @@ class CommentManager extends Manager{
 
     public function getCommentsByNbSign($nbSign){
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT comment_id FROM signals GROUP BY comment_id HAVING COUNT(comment_id)>0');
+        $req = $db->prepare('SELECT comment_id FROM signals GROUP BY comment_id HAVING COUNT(comment_id)>= :nbSignal');
         $req->execute(array('nbSignal' => $nbSign));
         if($req==false){
             throw new Exception('La requete de getCommentsByNbSign a echouée !');
