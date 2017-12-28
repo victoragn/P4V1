@@ -1,6 +1,6 @@
 <?php
 // Chargement des classes
-require_once('controler/frontoffice.php');
+require_once('controler/controlerIndex.php');
 require_once('controler/recaptchalib.php');
 $siteKey = '6LfSVzoUAAAAADOuqcN9fTrBWdm5S-rKPfdM95uB'; // votre clé publique
 $secret = '6LfSVzoUAAAAAASIbgZ9YYg_eBoJf-nupcyxuJMk'; // votre clé privée

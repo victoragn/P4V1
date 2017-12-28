@@ -1,6 +1,6 @@
 <?php
 if(!isset($_SESSION)) {session_start();} 
-require('controler/frontoffice.php');
+require('controler/controlerIndex.php');
 
 if(isset($_SESSION['author_id'])){//si la session est lancée est que l'id est définie
         setCurrentUSer($_SESSION['author_id']);

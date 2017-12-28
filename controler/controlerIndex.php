@@ -77,7 +77,7 @@ function modifComment($commentId, $commentContent){
 function login($pseudo,$password){
     $userManager= new UserManager();
     $result=$userManager->checkLogin($pseudo,$password);
-    
+
     if (!$result['check']){
         throw new Exception('Mauvais identifiant ou mot de passe');
     }else{
