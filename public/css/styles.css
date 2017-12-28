@@ -26,6 +26,7 @@ body{
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    min-width: 320px;
 }
 .aSansDeco{
     text-decoration: none;
@@ -204,6 +205,7 @@ header h1{
 /*/////////////////// DASHBOARD ///////////////////*/
 #dashBody{
     background-color: #EFEFEF;
+    min-width: 768px;
 }
 .backBtn{
     margin : 2px;
@@ -238,4 +240,41 @@ td, th{
     width: 120px;
     text-align: right;
     padding-right: 5px;
+}
+
+/*//////////////////////////////  MEDIA QUERIES    ////////////////////////////////////////*/
+@media (max-width: 1000px) {
+    header{justify-content: space-around;}
+    #userHeader,#logHeader{position: relative;}
+}
+@media (max-width: 768px) {
+    body{padding: 0 15px;}
+    #titrePrincipal1 {font-size: 1em;}
+    #titrePrincipal2 {font-size: 0.6em;}
+    .champLogHeader{width: 120px;}
+    #logHeader {font-size: 0.8em;}
+    header{justify-content: space-between;}
+    #logHeader label{
+        width: 90px;
+        padding-right: 2px;
+    }
+}
+@media (max-width: 500px) {
+    body{padding: 0 10px;}
+    #titrePrincipal1 {font-size: 0.8em;}
+    #titrePrincipal2 {font-size: 0.5em;}
+    header{
+        flex-direction: column;
+        justify-content:flex-start;
+    }
+    #userHeader{align-self: flex-end;}
+    header .frontBtn{
+        padding: 2px;
+        border-top-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        font-size: 0.8em;
+    }
+    h1{padding: 10px 0;}
+    .profilForm{font-size: 0.8em;}
+    .profilForm input{width: 120px;}
 }
