@@ -5,7 +5,7 @@ require_once("model/Post.php");
 class PostManager extends Manager{
     public function getPosts(){
         $db = $this->dbConnect();
-        $req = $db->query('SELECT post_id as id, post_title as title, post_content as content, post_creation_date as creationDate FROM posts ORDER BY post_creation_date DESC');
+        $req = $db->query('SELECT post_id as id, post_title as title, post_content as content, DATE_FORMAT(post_creation_date, \'%d/%m/%Y à %Hh%i\') AS creationDate FROM posts ORDER BY post_creation_date DESC');
         if($req==false){
             throw new Exception('La requete de getPosts a echouée !');
         }else{
@@ -20,7 +20,7 @@ class PostManager extends Manager{
 
     public function getPost($postId){
         $db = $this->dbConnect();
-        $req = $db->prepare('SELECT post_id as id, post_title as title, post_content as content, post_creation_date as creationDate FROM posts WHERE post_id = ?');
+        $req = $db->prepare('SELECT post_id as id, post_title as title, post_content as content, DATE_FORMAT(post_creation_date, \'%d/%m/%Y à %Hh%i\') AS creationDate FROM posts WHERE post_id = ?');
         $req->execute(array($postId));
         if($req==false){
             throw new Exception('La requete de getPost a echouée !');

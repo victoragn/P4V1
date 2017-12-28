@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="robots" content="index, nofollow">
         <meta charset="utf-8" />
         <title><?= $title ?></title>
         <link href="/P4V1/public/css/styles.css" rel="stylesheet" />

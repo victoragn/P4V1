@@ -50,7 +50,13 @@ class Post{
         }
     }
     public function setExcerpt($content){
-        $this->_excerpt=substr(strip_tags($content),0,50);
+        $resume=substr(strip_tags($content),0,60);
+        $pos=strrpos($resume, " ");
+        if($pos===false){
+            $this->_excerpt=substr(strip_tags($content),0,60);
+        }else{
+            $this->_excerpt=substr(strip_tags($content),0,$pos);
+        }
     }
     public function setExcerpt2($content){
         $resume=substr($content,0,700);

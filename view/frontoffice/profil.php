@@ -1,4 +1,8 @@
-<?php $title = 'Modifier le profil'; ?>
+<?php
+    $title = 'Modifier le profil';
+    $pageTitle = 'Modifier le profil';
+    $description='Page pour modifier son profil - Blog de Jean Forteroche'
+?>
 
 <?php ob_start(); ?>
 <p><a href="index.php">Retour à l'accueil</a></p>
@@ -16,26 +20,26 @@
 
 <div class="profilForm">
    <form action="index.php?action=profil" method="post">
-        <div>Modifier le mot de passe : <br />
-            <label for="oldPass">Ancien mot de passe</label>
+        <div class="cadreModifProfil"><span class="titreModifProfil">Modifier le mot de passe :</span><br />
+            <label class="profilLabel" for="oldPass">Ancien mot de passe</label>
             <input id="oldPasswordInput" type="password" name="oldPass" />
             <br />
 
-            <label for="changePass1">Mot de passe</label>
+            <label class="profilLabel" for="changePass1">Mot de passe</label>
             <input id="changePassInput1" type="password" name="changePass1"/>
             <br />
 
-            <label for="changePass2">Retapez le mot de passe</label>
+            <label class="profilLabel" for="changePass2">Retapez le mot de passe</label>
             <input id="changePassInput2" type="password" name="changePass2"/>
             <br />
         </div>
-        <div>Changer votre email : <br />
-            <label for="changeEmail">Email</label>
+       <div class="cadreModifProfil"><span class="titreModifProfil">Changer votre email :</span><br />
+            <label class="profilLabel" for="changeEmail">Email</label>
             <input id="email_input" type="email" name="changeEmail" value="<?php
                 if(isset($_SESSION['email'])){echo htmlspecialchars($_SESSION['email']);?>" />
         </div>
         <div>
-            <input type="submit" />
+            <input class="frontBtn cadreModifProfil" type="submit" />
         </div>
     </form>
 </div>

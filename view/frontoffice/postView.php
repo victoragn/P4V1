@@ -1,5 +1,9 @@
-<?php $title = 'Jean Forteroche'; ?>
-<?php $title2= 'Le Blog'; ?>
+<?php
+    $title = 'Jean Forteroche';
+    $title2= 'Le Blog';
+    $pageTitle=$post->getTitle();
+    $description=$post->getExcerpt();
+?>
 
 <?php ob_start(); ?>
 <p><a href="index.php"><button class="frontBtn">Retour à la liste des billets</button></a></p>

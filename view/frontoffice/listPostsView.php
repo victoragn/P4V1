@@ -1,5 +1,9 @@
-<?php $title = 'Jean Forteroche'; ?>
-<?php $title2= 'Le Blog'; ?>
+<?php
+    $title = 'Jean Forteroche';
+    $title2= 'Le Blog';
+    $pageTitle='Jean Forteroche - Le blog';
+    $description='Retrouvez toutes les semaines un nouveau chapitre de notre aventure !';
+?>
 
 <?php ob_start(); ?>
 <div id="pPresentation">

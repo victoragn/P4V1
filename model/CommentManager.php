@@ -6,7 +6,7 @@ class CommentManager extends Manager{
     public function getComments($postId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
+            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS commentDate
             FROM comments
             WHERE post_id = ?
             ORDER BY comment_date
@@ -28,7 +28,7 @@ class CommentManager extends Manager{
     public function getCommentsByUserId($userId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
+            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS commentDate
             FROM comments
             WHERE author_id = ?
             ORDER BY comment_date
@@ -50,7 +50,7 @@ class CommentManager extends Manager{
     public function getComment($commentId){
         $db = $this->dbConnect();
         $req = $db->prepare(
-            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, comment_date as commentDate
+            'SELECT comment_id as id, post_id as postId, author_id as authorId, comment, DATE_FORMAT(comment_date, \'%d/%m/%Y à %Hh%i\') AS commentDate
             FROM comments
             WHERE comment_id = ?'
         );
