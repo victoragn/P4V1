@@ -12,7 +12,7 @@
         if (isset($champPassVide) && $champPassVide==1){echo "Si vous souhaitez modifier le mot de passe, les 3 champs doivent être remplis !";}
         if (isset($champPassDiff) && $champPassDiff==1){echo "Les deux champs du nouveau mot de passe sont différents !";}
         if (isset($modifPassword) && $modifPassword==1){echo "Le mot de passe a bien été modifié";}
-        if (isset($modifEmail) && $modifEmail==1){echo "L\'email a bien été modifié";}
+        if (isset($modifEmail) && $modifEmail==1){echo "L'email a bien été modifié";}
         if (isset($modifPseudo) && $modifPseudo==1){echo "Le pseudo a bien été modifié";}
 
     ?>

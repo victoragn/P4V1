@@ -5,11 +5,11 @@
         <meta charset="utf-8" />
         <title><?= $pageTitle ?></title>
         <meta name="description" content="<?= $description ?>" />
-        <link href="/P4V1/public/css/styles.css" rel="stylesheet" />
+        <link href="/public/css/styles.css" rel="stylesheet" />
         <script src='https://www.google.com/recaptcha/api.js'></script>
-        <link rel="icon" type="image/png" sizes="32x32" href="/P4V1/public/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="96x96" href="/P4V1/public/favicon/favicon-96x96.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/P4V1/public/favicon/favicon-16x16.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
     </head>
 
     <body>
@@ -34,5 +34,5 @@
         </footer>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="../P4V1/public/js/script.js"></script>
+    <script src="../public/js/script.js"></script>
 </html>
