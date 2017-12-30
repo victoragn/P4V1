@@ -6,13 +6,11 @@
 
 <div class="registerForm">
     <div id="messagesInfos">
-        <?php 
-            if (isset($userAlreadyExistMessage)){echo $userAlreadyExistMessage;}
-            if (isset($mailAlreadyExistMessage)){echo $mailAlreadyExistMessage;}
-            if (isset($differentPasswordMessage)){echo $differentPasswordMessage;}
-            if (isset($checkCaptchaMessage)){echo $checkCaptchaMessage;}
-            $messChampVide='<span class="messChampVide" id="messPseudoVide">Vous devez remplir ce champ</span>';
-        ?>
+        <p class="messRegister"><?php if (isset($userAlreadyExistMessage)){echo $userAlreadyExistMessage;} ?></p>
+        <p class="messRegister"><?php if (isset($mailAlreadyExistMessage)){echo $mailAlreadyExistMessage;} ?></p>
+        <p class="messRegister"><?php if (isset($differentPasswordMessage)){echo $differentPasswordMessage;} ?></p>
+        <p class="messRegister"><?php if (isset($checkCaptchaMessage)){echo $checkCaptchaMessage;} ?></p>
+        <?php $messChampVide='<span class="messChampVide" id="messPseudoVide">Vous devez remplir ce champ</span>'; ?>
     </div>
    <form action="register.php" method="post">
         <div>

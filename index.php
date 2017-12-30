@@ -24,12 +24,11 @@ try {
             if (isset($_GET['id']) && $_GET['id'] > -1) {
                 if(isset($_GET['deleteComment']) && $_GET['deleteComment'] >=0){
                     supprComment(htmlspecialchars($_GET['deleteComment']));
-                    header('Location:'.$_SERVER['PHP_SELF'].'?action=post&id='.htmlspecialchars($_GET['id']));
-                    die;
+                    header('Location: index.php?action=post&id='.htmlspecialchars($_GET['id']).'#comments');
+                }elseif(isset($_GET['signal']) && isset($_GET['commentId'])){
+                    toggleSignal($_GET['signal'],$_GET['commentId']);
+                    header('Location: index.php?action=post&id='.htmlspecialchars($_GET['id']).'#comments');
                 }else{
-                    if(isset($_GET['signal']) && isset($_GET['commentId'])){
-                        toggleSignal($_GET['signal'],$_GET['commentId']);
-                    }
                     post($_GET['id']);
                 }
             }else {
@@ -70,26 +69,12 @@ try {
             session_destroy();
             header('Location: index.php');
 
-        }elseif ($_GET['action'] == 'deleteUser' && isset($_GET['userId']) && $_GET['userId']>=0) {
-            if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
-                throw new Exception('Vous n\'avez pas le droit de supprimer un utilisateur');
-            }else{
-                deleteUser(htmlspecialchars($_GET['userId']));
-            }
-
-        }elseif ($_GET['action'] == 'deletePost' && isset($_GET['postId']) && $_GET['postId']>=0) {
-            if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
-                throw new Exception('Vous n\'avez pas le droit de supprimer cet article');
-            }else{
-                deletePost(htmlspecialchars($_GET['postId']));
-                header('Location: index.php?action=dashboard');
-            }
 
         }elseif ($_GET['action'] == 'dashboard') { // accès au dashboard par l'admin
             if(!isset($_SESSION['role'])||$_SESSION['role']!=1){
                 throw new Exception('Vous n\'avez pas le droit d\'ouvrir le dashboard');
             }else{
-                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] >=0){
+                if(isset($_GET['deleteComment']) && $_GET['deleteComment'] >=0){//supprimer un commentaire
                     supprComment(htmlspecialchars($_GET['deleteComment']));
                     header('Location: index.php?action=dashboard');
                 }elseif (isset($_GET['page']) && $_GET['page']=='users') { //gerer les membres
@@ -107,6 +92,9 @@ try {
                     }else{
                         header('Location: index.php?action=dashboard');
                     }
+                }elseif (isset($_GET['deletePost']) && $_GET['deletePost']== 'true' && isset($_GET['postId']) && $_GET['postId']>=0) {//supprimer un article
+                        deletePost(htmlspecialchars($_GET['postId']));
+                        header('Location: index.php?action=dashboard');
                 }elseif (isset($_GET['editPost']) && $_GET['editPost']>=0) { // Créer un nouvel article
                     modifPost($_GET['editPost'],$_POST['titlePost'],$_POST['editedPost']);
                 }else{

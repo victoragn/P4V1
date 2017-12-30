@@ -18,7 +18,6 @@ function getSignComments(){
 function post($postId){
     $postManager = new PostManager();
     $commentManager = new CommentManager();
-    $userManager = new UserManager();
 
     $post = $postManager->getPost(htmlspecialchars($postId));
     $comments = $commentManager->getComments(htmlspecialchars($postId));
@@ -52,7 +51,7 @@ function addComment($postId, $authorId, $commentContent){
         if ($affectedLines === false) {
             throw new Exception('Impossible d\'ajouter le commentaire !');
         }else {
-            header('Location: index.php?action=post&id=' . $postId);
+            header('Location: index.php?action=post&id=' . $postId . '#comments');
         }
     }
 }
@@ -67,7 +66,7 @@ function modifComment($commentId, $commentContent){
         if ($affectedLines === false) {
             throw new Exception('Impossible de modifier le commentaire !');
         }else {
-            header('Location: index.php?action=post&id='. $postId);
+            header('Location: index.php?action=post&id='. $postId . '#comments');
         }
     }else{
         throw new Exception('Vous n\'etes pas identifié pour modifier le commentaire');

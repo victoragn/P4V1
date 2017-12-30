@@ -277,4 +277,5 @@ td, th{
     h1{padding: 10px 0;}
     .profilForm{font-size: 0.8em;}
     .profilForm input{width: 120px;}
+    #commentInput{width: 300px;}
 }
