@@ -8,7 +8,7 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="96x96" href="/public/favicon/favicon-96x96.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon/favicon-16x16.png">
-        <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
+        <script src="https://cloud.tinymce.com/stable/tinymce.min.js?apiKey=ziijpdh94dzkctu4q80mq44cc7ed7uub5el9dqcecy7zlh6c"></script>
         <script>
         tinymce.init({
             width:"100%",

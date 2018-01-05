@@ -3,6 +3,7 @@
     <head>
         <meta name="robots" content="index, follow">
         <meta charset="utf-8" />
+        <meta name="viewport" content="initial-scale=1">
         <title><?= $pageTitle ?></title>
         <meta name="description" content="<?= $description ?>" />
         <link href="/public/css/styles.css" rel="stylesheet" />
